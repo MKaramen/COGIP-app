@@ -5,28 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>COGIP | Log in </title>
+    <title>COGIP | Users </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-8 offset-2">
-                <h1 class="text-center">Weclome $user</h1>
-                <form class="mt-5 text-center" method="post" action="">
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter your username">
-                    </div>
-                    <div class="form-group mt-4">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Password">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary mt-3">Submit</button>
-                </form>
-            </div>
+            <!-- Add -->
         </div>
     </div>
 
