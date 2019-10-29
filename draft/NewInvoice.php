@@ -16,13 +16,13 @@
                 <h1 class="text-center">Create a new invoice</h1>
                 <form class="mt-5 text-center" method="post" action="">
                     <div class="form-group">
-                        <label for="invoice_number">Invoice Number</label>
-                        <input type="text" class="form-control" id="invoice_number" aria-describedby="invoice_numberHelp" placeholder="Enter your invoice number">
+                        <label for="invoiceNumber">Invoice Number</label>
+                        <input type="text" class="form-control" id="invoiceNumber" aria-describedby="invoiceNumberHelp" placeholder="Enter your invoice number">
                     </div>
 
                     <div class="form-group">
-                        <label for="invoice_date">Invoice Date</label>
-                        <input type="invoice_date" class="form-control" id="invoice_date" aria-describedby="invoice_dateHelp" placeholder="Enter your invoice date">
+                        <label for="invoiceDate">Invoice Date</label>
+                        <input type="invoiceDate" class="form-control" id="invoiceDate" aria-describedby="invoiceDateHelp" placeholder="Enter your invoice date">
                     </div>
 
                     <div class="form-group">
@@ -38,8 +38,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="invoice_contact">Invoice Contact</label>
-                        <select class="form-control" id="invoice_contact">
+                        <label for="invoiceContact">Invoice Contact</label>
+                        <select class="form-control" id="invoiceContact">
                             <option disabled selected>Select contact</option>
                             <option>1</option>
                             <option>2</option>
