@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le :  lun. 28 oct. 2019 à 14:12
--- Version du serveur :  10.4.8-MariaDB
--- Version de PHP :  7.3.10
+-- Host: database:3306
+-- Generation Time: Oct 29, 2019 at 08:50 AM
+-- Server version: 10.4.2-MariaDB-1:10.4.2+maria~bionic
+-- PHP Version: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,89 +19,53 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `cogip`
+-- Database: `cogip`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `company`
+-- Table structure for table `people_has_company`
 --
 
-CREATE TABLE `company` (
+CREATE TABLE `people_has_company` (
   `id` int(11) NOT NULL,
-  `company_name` varchar(64) NOT NULL,
-  `country` varchar(32) NOT NULL,
-  `tva` varchar(32) NOT NULL,
-  `type` varchar(8) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `invoice`
---
-
-CREATE TABLE `invoice` (
-  `id` int(11) NOT NULL,
-  `invoice_nbr` char(13) NOT NULL,
-  `invoice_date` date NOT NULL,
-  `company_name` varchar(64) NOT NULL,
-  `invoice_contact` varchar(64) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `people`
---
-
-CREATE TABLE `people` (
-  `id` int(11) NOT NULL,
-  `full_name` varchar(64) NOT NULL,
-  `email` varchar(64) NOT NULL,
-  `password` varchar(128) NOT NULL,
-  `phone` char(8) NOT NULL,
-  `company_name` varchar(64) NOT NULL
+  `fk_people` int(11) NOT NULL,
+  `fk_company` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `company`
+-- Indexes for table `people_has_company`
 --
-ALTER TABLE `company`
-  ADD PRIMARY KEY (`id`,`company_name`);
+ALTER TABLE `people_has_company`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_people_has_company_company` (`fk_company`),
+  ADD KEY `fk_people_has_company_people` (`fk_people`);
 
 --
--- Index pour la table `invoice`
---
-ALTER TABLE `invoice`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `people`
---
-ALTER TABLE `people`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `company`
+-- AUTO_INCREMENT for table `people_has_company`
 --
-ALTER TABLE `company`
+ALTER TABLE `people_has_company`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `people`
+-- Constraints for dumped tables
 --
-ALTER TABLE `people`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for table `people_has_company`
+--
+ALTER TABLE `people_has_company`
+  ADD CONSTRAINT `fk_people_has_company_company` FOREIGN KEY (`fk_company`) REFERENCES `company` (`id`),
+  ADD CONSTRAINT `fk_people_has_company_people` FOREIGN KEY (`fk_people`) REFERENCES `people` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -13,14 +13,15 @@
     <div class="container">
         <div class="row">
             <div class="col-8 offset-2">
-                <form class="mt-5 text-center   ">
+                <h1 class="text-center">Weclome $user</h1>
+                <form class="mt-5 text-center" method="post" action="">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Username</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your username">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter your username">
                     </div>
                     <div class="form-group mt-4">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Password">
                     </div>
 
                     <button type="submit" class="btn btn-primary mt-3">Submit</button>
