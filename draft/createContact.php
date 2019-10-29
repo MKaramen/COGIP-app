@@ -36,6 +36,11 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" aria-describedby="passwordHelp" placeholder="Enter your password">
+                    </div>
+
+                    <div class="form-group">
                         <label for="companyName">Company Name</label>
                         <select class="form-control" id="companyName">
                             <option disabled selected>Select company name</option>
