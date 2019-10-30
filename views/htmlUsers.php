@@ -10,8 +10,25 @@
 </head>
 
 <body>
+    <h1 class="text-center">All users</h1>
     <div class="container">
         <div class="row">
+            <table>
+                <?php
+
+                while ($data = $users->fetch()) {
+
+                    echo "<tr>";
+                    foreach ($data as $value) {
+
+                        echo "<td class='table_value'>$value</td>";
+                    }
+                    echo "</tr>";
+                }
+                ?>
+
+
+            </table>
             <!-- Add -->
         </div>
     </div>
