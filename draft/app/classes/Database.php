@@ -1,21 +1,22 @@
 <?php
-// Create class CRUD -> create instance for every request 
-class CRUD
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/COGIP-app/draft/app/config/_env.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/COGIP-app/draft/vendor/autoload.php';
+
+class Database
 {
     protected $db;
-    private $dns;
-    private $nameHost;
-    private $nameDb;
-    private $username;
-    private $password;
-    public function __construct($dns, $nameHost, $nameDb, $username, $password)
+
+    public function __construct()
     {
-        $this->dns = $dns;
-        $this->nameHost = $nameHost;
-        $this->nameDb = $nameDb;
-        $this->username = $username;
-        $this->password = $password;
+        $this->dns = getenv('DB_DRIVER');
+        $this->nameHost = getenv('DB_HOST');
+        $this->nameDb = getenv('DB_NAME');
+        $this->username = getenv('DB_USERNAME');
+        $this->password = getenv('DB_PASSWORD');
     }
+
+
     // Function that will be called before every single request 
     // $db = new PDO('mysql:host=database;dbname=cogip_test', 'root', 'root');
     public function connectDb()
