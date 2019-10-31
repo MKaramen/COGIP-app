@@ -15,16 +15,9 @@
         <div class="row">
             <table>
                 <?php
-
-                while ($data = $users->fetch()) {
-
-                    echo "<tr>";
-                    foreach ($data as $value) {
-
-                        echo "<td class='table_value'>$value</td>";
-                    }
-                    echo "</tr>";
-                }
+                makeTable($users);
+                makeTable($company);
+                makeTable($invoice);
                 ?>
 
 
