@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 
-spl_autoload_register(function ($classname) {
+spl_autoload_register(function (string $classname) {
     $folders = array(
         $_SERVER['DOCUMENT_ROOT'] . '/app/classes/'     . $classname . '.php', 
         $_SERVER['DOCUMENT_ROOT'] . '/app/route/'       . $classname . '.php', 
