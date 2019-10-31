@@ -28,10 +28,15 @@ class Database
     }
     // Get data from the DB => Solve column issues array ??
     // $getData = $db->query("SELECT columnsToSelect FROM name_of_table");
-    public function getData($columns, $name_of_table)
+    public function getData($request)
     {
+        $array = [];
         $this->connectDb();
-        $req = $this->db->query("SELECT $columns FROM $name_of_table");
+        $req = $this->db->query("$request");
+
+        while ($data = $req->fetch()) {
+            $array[$data['id']] = array_slice($data, 1);
+        }
         return $req;
     }
     // INSERT Data
