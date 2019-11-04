@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 declare(strict_types=1);
 
@@ -9,10 +9,10 @@ define('APP_ROOT', str_replace('\\', '/', dirname(dirname(__DIR__))));
 /* Get the app URL */
 function getAppURL(): string
 {
-    if(isset($_SERVER['HTTPS'])) $protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != 'off') ? 'https' : 'http';
+    if (isset($_SERVER['HTTPS'])) $protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != 'off') ? 'https' : 'http';
     else $protocol = 'http';
 
-    return $protocol . '://localhost/projects/cogip.dev';
+    return $protocol . '://localhost/COGIP-app';
 }
 
 /* Declare const of arrays (APP_PARAMS) */
@@ -27,16 +27,15 @@ define('APP_PARAMS', array(
 
     # Database parameters
     'DB_DRIVER'   => 'mysql',         # Data source name (DSN)
-    'DB_HOST'     => 'localhost',     # Database host
+    'DB_HOST'     => 'database',     # Database host
     'DB_NAME'     => 'cogip_test',    # Database name
     'DB_USERNAME' => 'root',          # Database user
-    'DB_PASSWORD' => '',              # Database password
+    'DB_PASSWORD' => 'root',              # Database password
 
     # PHP config
 ));
 
 /* Set env variables */
-foreach(APP_PARAMS as $key => $value) 
-{
+foreach (APP_PARAMS as $key => $value) {
     putenv($key . '=' . $value);
 }

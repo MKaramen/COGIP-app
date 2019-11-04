@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 declare(strict_types=1);
 
@@ -16,6 +16,8 @@ require_once './vendor/autoload.php';
 /* Setup routing */
 $route = new Route();
 $route->routeRequest();
+$test = new PagesModel;
+$test->users();
 
 
 

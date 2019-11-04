@@ -12,14 +12,14 @@ class PagesController extends Controller
 
     public function __construct()
     {
-        $this->currentModel = $this->model('PagesModel'); 
+        $this->currentModel = $this->model('PagesModel');
     }
 
     public function index(): void
     {
         $data = array(
             'title'               => 'Home',
-            'content_title'       => 'Welcome to the COGIP', 
+            'content_title'       => 'Welcome to the COGIP',
             'content_description' => 'Bonjour !',
         );
 
@@ -30,7 +30,7 @@ class PagesController extends Controller
     {
         $data = array(
             'title'               => 'Users',
-            'content_title'       => 'COGIP: Users directory', 
+            'content_title'       => 'COGIP: Users directory',
             'content_description' => 'Bonjour !',
         );
 
@@ -41,7 +41,7 @@ class PagesController extends Controller
     {
         $data = array(
             'title'               => 'Invoices',
-            'content_title'       => 'COGIP: List of invoices', 
+            'content_title'       => 'COGIP: List of invoices',
             'content_description' => 'Bonjour !',
         );
 
@@ -52,7 +52,7 @@ class PagesController extends Controller
     {
         $data = array(
             'title'               => 'Companies',
-            'content_title'       => 'COGIP: Companies directory', 
+            'content_title'       => 'COGIP: Companies directory',
             'content_description' => 'Bonjour !',
         );
 

@@ -1,74 +1,76 @@
 <?php
-
-declare(strict_types=1);
-
-/*
- * Database Class
- *   - connect to the Database
- *   - create prepared stmts
- *   - bind Values
- *   - return Rows and Results
- */
-class Database 
+class Database
 {
+    protected $db;
+    protected $fetchInfo;
 
-    private $driver   = 'mysql';
-    private $host	  = 'localhost';
-	private $username = 'root';
-	private $password = '';
-    private $dbname	  = 'cogip_test';
-    private $options  = array(
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    );
 
-    private $stmt;
-    protected $con;
-
-    public function __construct() 
+    public function __construct()
     {
-        $this->dsn = "{$this->driver}:host={$this->host};dbname={$this->dbname};charset=utf8"; 
+        $this->dns = getenv('DB_DRIVER');
+        $this->nameHost = getenv('DB_HOST');
+        $this->nameDb = getenv('DB_NAME');
+        $this->username = getenv('DB_USERNAME');
+        $this->password = getenv('DB_PASSWORD');
+    }
+    // Function that will be called before every single request 
+    // $db = new PDO('mysql:host=database;dbname=cogip_test', 'root', 'root');
+    public function connectDb()
+    {
+        $this->closeDb();
+        $this->db = new PDO("{$this->dns}:host={$this->nameHost};dbname={$this->nameDb}", "{$this->username}", "{$this->password}", array(
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        ));
     }
 
-    protected function open() 
+    public function closeDb()
     {
-        try 
-        {
-            $this->con = null;
-            $this->con = new PDO($this->dsn, $this->username, $this->password, $this->options);
-        } 
-        catch (PDOException $e) 
-        {
-            echo 'There is some problem in connection: ' . $e->getMessage();
+        $this->db = null;
+    }
+    // Get data from the DB => Solve column issues array ??
+    // $getData = $db->query("SELECT columnsToSelect FROM name_of_table");
+    public function getData($request)
+    {
+        // Fetch data and put in an assoc array called arrData 
+        $arrData = [];
+        $number = 1;
+
+        $this->connectDb();
+        $req = $this->db->query($request);
+        while ($this->fetchInfo = $req->fetch()) {
+            $arrData[] = array_merge(array('number' => $number), $this->fetchInfo);
+            $number++;
         }
+        $this->closeDb();
+
+        return $arrData;
     }
-
-    protected function close() {
-        $this->con = null;
-	}
-
-    protected function insert($query, $bindings=[])
+    // INSERT Data
+    // $insertData = $db->exec('INSERT INTO name_of_table($colums) VALUES ($valuesToInsert)');
+    public function insertData($name_of_table, $columns, $valuesToInsert)
     {
-
+        $this->connectDb();
+        $req = $this->db->query("INSERT INTO $name_of_table($columns) VALUES($valuesToInsert)");
+        $this->closeDb();
+        return $req;
     }
-
-    public function update($query, $bindings = []);
-
-    /**
-     * Run a delete statement against the database.
-     *
-     * @param  string  $query
-     * @param  array   $bindings
-     * @return int
-     */
-    public function delete($query, $bindings=[]);
-
-    /**
-     * Execute an SQL statement and return the boolean result.
-     *
-     * @param  string  $query
-     * @param  array   $bindings
-     * @return bool
-     */
-
+    //UPDATE DATA 
+    // $updateData = $db->exec('UPDATE name_of_table SET newValueToSet WHERE condition');
+    public function updateData($name_of_table, $newValueToSet, $condition)
+    {
+        $this->connectDb();
+        $req = $this->db->query("UPDATE $name_of_table SET $newValueToSet WHERE $condition");
+        $this->closeDb();
+        return $req;
+    }
+    // DELETE DATA 
+    // $deleteData = $db->exec('DELETE FROM name_of_table WHERE condition');
+    public function deleteData($name_of_table, $condition)
+    {
+        $this->connectDb();
+        $req = $this->db->query("DELETE FROM $name_of_table WHERE $condition");
+        $this->closeDb();
+        return $req;
+    }
 }
