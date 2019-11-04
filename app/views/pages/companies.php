@@ -10,7 +10,12 @@
             <p class="content__description"><?= $data['content_description'] ?></p>
 
             <!-- Tables -->
-            <?= Helper::dump($data) ?>
+            <?= Helper::dump($data); ?>
+            <table>
+                <?php require getenv('APP_ROOT') . '/app/views/inc/table.php' ?>
+            </table>
+
+
 
         </div>
     </section>
