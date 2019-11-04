@@ -1,0 +1,126 @@
+/* === Fonts === */
+
+/* === Variables ===  */
+:root {
+    /* Colors */
+    --cogip-body-text: #303030;
+
+    --cogip-logo-title: #ff6b34;
+    --cogip-ratings-star: yellow;
+    --cogip-ratings-text: aquamarine;
+
+    --cogip-nav: #303030;
+    --cogip-link: #f5f5f5;
+    --cogip-link-active: #ff6b34;
+    --cogip-hamburger-bars:#ff6b34;
+
+    --cogip-content: #e9ecef;
+    --cogip-dashboard: #23629f;
+
+    /* Distances */
+    --cogip-header-height: 100px;
+    --cogip-footer-height: 50px;
+    --cogip-dahsboard-width: 200px;
+}
+
+/* === USER PAGES === */
+
+/* === Rules for main blocks === */
+body {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: minmax(350px, 1fr);
+    grid-template-rows: var(--cogip-header-height) 1fr var(--cogip-footer-height);
+    color: var(--cogip-body-text);
+}
+#header, #footer {
+    background-color: var(--cogip-nav);
+    color: var(--cogip-link);
+}
+#nav {background-color: var(--cogip-nav);}
+#main {background-color: var(--cogip-content);}
+
+/* === Rules for logo === */
+/* .logo__block {} */
+.logo__title {
+    font-size: 2rem;
+    font-weight: bolder;
+    color: var(--cogip-logo-title);
+}
+.logo__ratings {
+    font-size: 1rem;
+    font-family: monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--cogip-ratings-text);
+}
+.logo__ratings .fa-star {color: var(--cogip-ratings-star);}
+
+/* === Rules for hamburger icon === */
+button * {pointer-events: none;}
+nav-button:active {
+    border: none;
+    outline: none;
+}
+.nav__hamburger {background-color: transparent;}
+.line {
+    display: block;
+    width: 23px;
+    height: 3px;
+    margin: 5px;
+    transition: all 0.4s;
+    background-color: var(--cogip-hamburger-bars);
+}
+.change .line1 {transform: rotate(-45deg) translate(-5px, 6px);}
+.change .line2 {opacity: 0;}
+.change .line3 {transform: rotate(45deg) translate(-5px, -6px);}
+
+/* === Rules for nav-links === */
+.nav-link {
+    background-color: var(--cogip-nav);
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    transition: color 0.5s;
+}
+.nav-link:not(.nav-link--active) {color: var(--cogip-link);}
+.nav-link--active, .nav-link:hover {color: var(--cogip-link-active);}
+.nav-link::after {
+    display: block;
+    content: "";
+    height: 1rem;;
+    border-bottom: 3px solid var(--cogip-link-active);
+    transform: scaleX(0);
+    transition: transform 0.25s ease-in-out;
+}
+.nav-link:hover::after {transform: scaleX(1);}
+.nav-link::after {transform-origin: 0% 50%;}
+
+/* === Rules for main content === */
+.content {min-height: 100%;}
+.content__title {
+    font-size: 1.75rem;
+    font-weight: bolder;
+    text-align: center;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid currentColor;
+}
+/* .content__body {} */
+/* .content__description {} */
+
+/* == Rules for section table === */
+/* .content__table {} */
+.content__table-title {
+    font-size: 1.35rem;
+    font-weight: bolder;
+}
+/* .content__table-body {} */
+
+/* Rules for footer elements */
+.footer__copy {text-align: center;}
+
+/* === Media queries === */
+@media(min-width:768px) {
+    .nav__top {
+        border-top: 0 !important;
+    }
+}
