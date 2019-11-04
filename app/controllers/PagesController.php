@@ -23,6 +23,8 @@ class PagesController extends Controller
             'content_description' => 'Bonjour !',
         );
 
+        $dataModel = $this->currentModel->index();
+        $data = array_merge($data, $dataModel);
         $this->view('pages/index', $data);
     }
 
@@ -33,7 +35,8 @@ class PagesController extends Controller
             'content_title'       => 'COGIP: Users directory',
             'content_description' => 'Bonjour !',
         );
-
+        $dataModel = $this->currentModel->users();
+        $data = array_merge($data, $dataModel);
         $this->view('pages/users', $data);
     }
 
@@ -44,7 +47,8 @@ class PagesController extends Controller
             'content_title'       => 'COGIP: List of invoices',
             'content_description' => 'Bonjour !',
         );
-
+        $dataModel = $this->currentModel->invoices();
+        $data = array_merge($data, $dataModel);
         $this->view('pages/invoices', $data);
     }
 
@@ -56,6 +60,8 @@ class PagesController extends Controller
             'content_description' => 'Bonjour !',
         );
 
+        $dataModel = $this->currentModel->companies();
+        $data = array_merge($data, $dataModel);
         $this->view('pages/companies', $data);
     }
 }

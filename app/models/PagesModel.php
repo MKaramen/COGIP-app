@@ -41,7 +41,7 @@ class PagesModel extends Model
     {
         $request = 'SELECT people_fullName, people_email, people_phone, people_company FROM people';
         $result = $this->getData($request);
-        Helper::dump($result);
+        // Helper::dump($result);
         return $result;
     }
 
@@ -54,8 +54,6 @@ class PagesModel extends Model
 
     public function companies(): array
     {
-        $result_global = [];
-
         // Clients
         $request_client = 'SELECT company_name, company_tva, company_country FROM company WHERE company_fk_type=2;';
         $result_client = $this->getData($request_client);
@@ -65,9 +63,6 @@ class PagesModel extends Model
         $request_supplier = 'SELECT company_name, company_tva, company_country FROM company WHERE company_fk_type=1;';
         $result_supplier = $this->getData($request_supplier);
         $resultat_global['supplier'] = $result_supplier;
-
-
-        // Helper::dump($resultat_global);
 
         return $resultat_global;
     }
