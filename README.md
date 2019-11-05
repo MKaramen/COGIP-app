@@ -27,6 +27,18 @@ You can see the instructions [here] (https://github.com/becodeorg/BXL-Johnson-4.
 ## How long time did you work on this project?
 We had 10 days to work on this project from 25/10/2019 to 08/11/2019.
 
+## Technology
+
+### Front-End
+
+* HTML5
+* CSS3
+* JavaScript
+
+### Back-end
+
+* PHP
+
 ## Mock-up
 A completer
 
