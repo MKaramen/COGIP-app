@@ -25,7 +25,7 @@ class PagesController extends Controller
 
         $dataModel = $this->currentModel->index();
         $data = array_merge($data, $dataModel);
-        $this->view('pages/index', $data);
+        $this->view('pages/index', $data, $dataModel);
     }
 
     public function users(): void
@@ -36,8 +36,7 @@ class PagesController extends Controller
             'content_description' => 'Bonjour !',
         );
         $dataModel = $this->currentModel->users();
-        $data = array_merge($data, $dataModel);
-        $this->view('pages/users', $data);
+        $this->view('pages/users', $data, $dataModel);
     }
 
     public function invoices(): void
@@ -48,8 +47,7 @@ class PagesController extends Controller
             'content_description' => 'Bonjour !',
         );
         $dataModel = $this->currentModel->invoices();
-        $data = array_merge($data, $dataModel);
-        $this->view('pages/invoices', $data);
+        $this->view('pages/invoices', $data, $dataModel);
     }
 
     public function companies(): void
@@ -61,7 +59,6 @@ class PagesController extends Controller
         );
 
         $dataModel = $this->currentModel->companies();
-        $data = array_merge($data, $dataModel);
-        $this->view('pages/companies', $data);
+        $this->view('pages/companies', $data, $dataModel);
     }
 }

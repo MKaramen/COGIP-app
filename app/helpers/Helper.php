@@ -9,11 +9,10 @@ declare(strict_types=1);
 class Helper
 {
 
-    public static function view(string $view, array $data = []): void
+    public static function view(string $view, array $data = [], array $dataModel = []): void
     {
         // Require view file
         $path = getenv('APP_ROOT') . '/app/views/' . $view . '.php';
-
         if (!file_exists($path)) throw new Exception($path . 'not found!');
 
         require_once $path;
@@ -38,6 +37,26 @@ class Helper
         echo "<pre>";
         var_dump($var);
         echo "</pre>";
+    }
+
+    public static function makeTable($categoryName, $dataModel)
+    {
+        echo "<thead>";
+        foreach ($dataModel[$categoryName]['col'] as $colName) {
+            echo "<th>" . $colName . "</th>";
+        }
+        echo "</thead>";
+
+        echo "<tbody>";
+        // Helper::dump($dataModel);
+        foreach ($dataModel[$categoryName]['row'] as $user) {
+            echo "<tr>";
+            foreach ($user as $value) {
+                echo "<td>" . $value . "</td>";
+            }
+            echo "</tr>";
+        }
+        echo "</tbody>";
     }
 }
 

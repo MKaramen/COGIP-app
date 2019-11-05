@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 declare(strict_types=1);
 
@@ -6,7 +6,7 @@ declare(strict_types=1);
 /*
  * Base Controller class 
  */
-abstract class Controller 
+abstract class Controller
 {
 
     /* Load Model */
@@ -16,9 +16,9 @@ abstract class Controller
     }
 
     /* Load view */
-    public function view(string $view, array $data= []): void
+    public function view(string $view, array $data = [], array $dataModel = []): void
     {
-        Helper::view($view, $data);     // require view file
+        Helper::view($view, $data, $dataModel);     // require view file
     }
 
     /**
@@ -28,13 +28,12 @@ abstract class Controller
     public function __call($method, $args)
     {
 
-        if (!method_exists($this, $method)) throw new Exception('Method '.$method.'not found in controller '.__CLASS__);
+        if (!method_exists($this, $method)) throw new Exception('Method ' . $method . 'not found in controller ' . __CLASS__);
 
-        if ($this->before()) 
-        {
+        if ($this->before()) {
             call_user_func_array([$this, $method], $args);
             $this->after();
-        } 
+        }
     }
 
     /* Before filter - called before an action method */
@@ -44,5 +43,6 @@ abstract class Controller
     }
 
     /* After filter - called after an action method */
-    protected function after() {}
-} 
+    protected function after()
+    { }
+}
