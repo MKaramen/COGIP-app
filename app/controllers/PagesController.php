@@ -33,7 +33,7 @@ class PagesController extends Controller
         $data = array(
             'title'               => 'Users',
             'content_title'       => 'COGIP: Users directory',
-            'content_description' => 'Bonjour !',
+            'content_description' => '',
         );
         $dataModel = $this->currentModel->users();
         $this->view('pages/users', $data, $dataModel);
@@ -44,7 +44,7 @@ class PagesController extends Controller
         $data = array(
             'title'               => 'Invoices',
             'content_title'       => 'COGIP: List of invoices',
-            'content_description' => 'Bonjour !',
+            'content_description' => '',
         );
         $dataModel = $this->currentModel->invoices();
         $this->view('pages/invoices', $data, $dataModel);
@@ -55,7 +55,7 @@ class PagesController extends Controller
         $data = array(
             'title'               => 'Companies',
             'content_title'       => 'COGIP: Companies directory',
-            'content_description' => 'Bonjour !',
+            'content_description' => '',
         );
 
         $dataModel = $this->currentModel->companies();

@@ -1,126 +1,211 @@
 /* === Fonts === */
-
 /* === Variables ===  */
-:root {
-    /* Colors */
-    --cogip-body-text: #303030;
-
-    --cogip-logo-title: #ff6b34;
-    --cogip-ratings-star: yellow;
-    --cogip-ratings-text: aquamarine;
-
-    --cogip-nav: #303030;
-    --cogip-link: #f5f5f5;
-    --cogip-link-active: #ff6b34;
-    --cogip-hamburger-bars:#ff6b34;
-
-    --cogip-content: #e9ecef;
-    --cogip-dashboard: #23629f;
-
-    /* Distances */
-    --cogip-header-height: 100px;
-    --cogip-footer-height: 50px;
-    --cogip-dahsboard-width: 200px;
-}
-
+/* Colors */
+/* Distances */
 /* === USER PAGES === */
-
 /* === Rules for main blocks === */
 body {
-    height: 100vh;
-    display: grid;
-    grid-template-columns: minmax(350px, 1fr);
-    grid-template-rows: var(--cogip-header-height) 1fr var(--cogip-footer-height);
-    color: var(--cogip-body-text);
+  height: 100vh;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: minmax(350px, 1fr);
+      grid-template-columns: minmax(350px, 1fr);
+  color: #303030;
+  background: #FFA6A6;
 }
-#header, #footer {
-    background-color: var(--cogip-nav);
-    color: var(--cogip-link);
+
+header {
+  background-color: white;
+  color: #683636;
+  -ms-grid-row: 1;
+  grid-row: 1;
 }
-#nav {background-color: var(--cogip-nav);}
-#main {background-color: var(--cogip-content);}
+
+th:first-child {
+  color: red;
+}
+
+th:nth-child(2) {
+  color: blue;
+}
+
+th:nth-child(3) {
+  color: #d37383;
+}
+
+th:nth-child(4) {
+  color: green;
+}
+
+th:nth-child(5) {
+  color: orange;
+}
+
+td:first-child {
+  color: red;
+}
+
+td:nth-child(2) {
+  color: blue;
+}
+
+td:nth-child(3) {
+  color: #d37383;
+}
+
+td:nth-child(4) {
+  color: green;
+}
+
+td:nth-child(5) {
+  color: orange;
+}
+
+#footer {
+  background-color: white;
+  color: #683636;
+}
+
+#nav {
+  background-color: white;
+}
+
+#main {
+  background-color: white;
+}
 
 /* === Rules for logo === */
 /* .logo__block {} */
 .logo__title {
-    font-size: 2rem;
-    font-weight: bolder;
-    color: var(--cogip-logo-title);
+  font-size: 2rem;
+  font-weight: bolder;
+  color: #ff6b34;
 }
+
 .logo__ratings {
-    font-size: 1rem;
-    font-family: monospace;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: var(--cogip-ratings-text);
+  font-size: 1rem;
+  font-family: monospace;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: aquamarine;
 }
-.logo__ratings .fa-star {color: var(--cogip-ratings-star);}
+
+.logo__ratings .fa-star {
+  color: yellow;
+}
 
 /* === Rules for hamburger icon === */
-button * {pointer-events: none;}
+button * {
+  pointer-events: none;
+}
+
 nav-button:active {
-    border: none;
-    outline: none;
+  border: none;
+  outline: none;
 }
-.nav__hamburger {background-color: transparent;}
+
+.nav__hamburger {
+  background-color: transparent;
+}
+
 .line {
-    display: block;
-    width: 23px;
-    height: 3px;
-    margin: 5px;
-    transition: all 0.4s;
-    background-color: var(--cogip-hamburger-bars);
+  display: block;
+  width: 23px;
+  height: 3px;
+  margin: 5px;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  background-color: #725c53;
 }
-.change .line1 {transform: rotate(-45deg) translate(-5px, 6px);}
-.change .line2 {opacity: 0;}
-.change .line3 {transform: rotate(45deg) translate(-5px, -6px);}
+
+.change .line1 {
+  -webkit-transform: rotate(-45deg) translate(-5px, 6px);
+          transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.change .line2 {
+  opacity: 0;
+}
+
+.change .line3 {
+  -webkit-transform: rotate(45deg) translate(-5px, -6px);
+          transform: rotate(45deg) translate(-5px, -6px);
+}
 
 /* === Rules for nav-links === */
 .nav-link {
-    background-color: var(--cogip-nav);
-    font-size: 0.95rem;
-    letter-spacing: 1px;
-    transition: color 0.5s;
+  background-color: white;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  -webkit-transition: color 0.5s;
+  transition: color 0.5s;
 }
-.nav-link:not(.nav-link--active) {color: var(--cogip-link);}
-.nav-link--active, .nav-link:hover {color: var(--cogip-link-active);}
+
+.nav-link:not(.nav-link--active) {
+  color: #683636;
+}
+
+.nav-link--active,
+.nav-link:hover {
+  color: #FFA6A6;
+}
+
 .nav-link::after {
-    display: block;
-    content: "";
-    height: 1rem;;
-    border-bottom: 3px solid var(--cogip-link-active);
-    transform: scaleX(0);
-    transition: transform 0.25s ease-in-out;
+  display: block;
+  content: "";
+  height: 1rem;
+  border-bottom: 3px solid #FFA6A6;
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+  -webkit-transition: -webkit-transform 0.25s ease-in-out;
+  transition: -webkit-transform 0.25s ease-in-out;
+  transition: transform 0.25s ease-in-out;
+  transition: transform 0.25s ease-in-out, -webkit-transform 0.25s ease-in-out;
 }
-.nav-link:hover::after {transform: scaleX(1);}
-.nav-link::after {transform-origin: 0% 50%;}
+
+.nav-link:hover::after {
+  -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+}
+
+.nav-link::after {
+  -webkit-transform-origin: 0% 50%;
+          transform-origin: 0% 50%;
+}
 
 /* === Rules for main content === */
-.content {min-height: 100%;}
-.content__title {
-    font-size: 1.75rem;
-    font-weight: bolder;
-    text-align: center;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid currentColor;
+.content {
+  min-height: 100%;
 }
+
+.content__title {
+  font-size: 1.75rem;
+  font-weight: bolder;
+  text-align: center;
+  padding-bottom: 1rem;
+  color: #419ea5;
+}
+
 /* .content__body {} */
 /* .content__description {} */
-
 /* == Rules for section table === */
 /* .content__table {} */
 .content__table-title {
-    font-size: 1.35rem;
-    font-weight: bolder;
+  font-size: 1.35rem;
+  font-weight: bolder;
+  color: #a1a127;
 }
-/* .content__table-body {} */
 
+/* .content__table-body {} */
 /* Rules for footer elements */
-.footer__copy {text-align: center;}
+.footer__copy {
+  text-align: center;
+}
 
 /* === Media queries === */
-@media(min-width:768px) {
-    .nav__top {
-        border-top: 0 !important;
-    }
+@media (min-width: 768px) {
+  .nav__top {
+    border-top: 0 !important;
+  }
 }
+/*# sourceMappingURL=app.css.map */

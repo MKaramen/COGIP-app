@@ -9,8 +9,8 @@
 	.st3{font-size:75px;}
 	.st4{fill:#FFA6A6;}
 </style>
-<rect x="53" y="52.5" class="st0" width="293.5" height="145.5"/>
+<rect x="53" y="52.5" class="st0" width="293.5" height="61.1"/>
 <text transform="matrix(1 0 0 1 63.5381 105.2344)" class="st1 st2 st3">Cogip</text>
-<rect x="52" y="53.5" class="st0" width="293.5" height="145.5"/>
-<text transform="matrix(1 0 0 1 62.5381 106.2344)" class="st4 st2 st3">Cogip</text>
+<rect x="52" y="52.9" class="st0" width="293.5" height="61.1"/>
+<text transform="matrix(1 0 0 1 62.5381 105.6543)" class="st4 st2 st3">Cogip</text>
 </svg>

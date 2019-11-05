@@ -1,0 +1,229 @@
+/* === Fonts === */
+
+/* === Variables ===  */
+/* Colors */
+$cogip-body-text: #303030;
+$cogip-logo-title: #ff6b34;
+$cogip-ratings-star: yellow;
+$cogip-ratings-text: aquamarine;
+// $cogip-nav: rgb(255, 223, 223);
+$cogip-nav: white;
+// $cogip-link: #683636;
+$cogip-link: #683636;
+$cogip-link-active: #FFA6A6;
+$cogip-hamburger-bars: #725c53;
+$cogip-content: white;
+$cogip-dashboard: #23629f;
+/* Distances */
+$cogip-header-height: 100px;
+$cogip-footer-height: 50px;
+$cogip-dahsboard-width: 200px;
+
+
+/* === USER PAGES === */
+
+/* === Rules for main blocks === */
+body {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: minmax(350px, 1fr);
+    color: $cogip-body-text;
+    background: #FFA6A6;
+
+}
+
+header {
+    background-color: $cogip-nav;
+    color: $cogip-link;
+    grid-row: 1;
+}
+
+th {
+    &:first-child {
+        color: red;
+    }
+
+    &:nth-child(2) {
+        color: blue;
+    }
+
+    &:nth-child(3) {
+        color: rgb(211, 115, 131);
+    }
+
+    &:nth-child(4) {
+        color: green;
+    }
+
+    &:nth-child(5) {
+        color: orange;
+    }
+}
+
+td {
+    &:first-child {
+        color: red;
+    }
+
+    &:nth-child(2) {
+        color: blue;
+    }
+
+    &:nth-child(3) {
+        color: rgb(211, 115, 131);
+    }
+
+    &:nth-child(4) {
+        color: green;
+    }
+
+    &:nth-child(5) {
+        color: orange;
+    }
+}
+
+
+
+
+
+
+#footer {
+    background-color: $cogip-nav;
+    color: $cogip-link;
+}
+
+#nav {
+    background-color: $cogip-nav;
+}
+
+#main {
+    background-color: $cogip-content;
+}
+
+/* === Rules for logo === */
+/* .logo__block {} */
+.logo__title {
+    font-size: 2rem;
+    font-weight: bolder;
+    color: $cogip-logo-title;
+}
+
+.logo__ratings {
+    font-size: 1rem;
+    font-family: monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: $cogip-ratings-text;
+}
+
+.logo__ratings .fa-star {
+    color: $cogip-ratings-star;
+}
+
+/* === Rules for hamburger icon === */
+button * {
+    pointer-events: none;
+}
+
+nav-button:active {
+    border: none;
+    outline: none;
+}
+
+.nav__hamburger {
+    background-color: transparent;
+}
+
+.line {
+    display: block;
+    width: 23px;
+    height: 3px;
+    margin: 5px;
+    transition: all 0.4s;
+    background-color: $cogip-hamburger-bars;
+}
+
+.change .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.change .line2 {
+    opacity: 0;
+}
+
+.change .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* === Rules for nav-links === */
+.nav-link {
+    background-color: $cogip-nav;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    transition: color 0.5s;
+}
+
+.nav-link:not(.nav-link--active) {
+    color: $cogip-link;
+}
+
+.nav-link--active,
+.nav-link:hover {
+    color: $cogip-link-active;
+}
+
+.nav-link::after {
+    display: block;
+    content: "";
+    height: 1rem;
+    ;
+    border-bottom: 3px solid $cogip-link-active;
+    transform: scaleX(0);
+    transition: transform 0.25s ease-in-out;
+}
+
+.nav-link:hover::after {
+    transform: scaleX(1);
+}
+
+.nav-link::after {
+    transform-origin: 0% 50%;
+}
+
+/* === Rules for main content === */
+.content {
+    min-height: 100%;
+}
+
+.content__title {
+    font-size: 1.75rem;
+    font-weight: bolder;
+    text-align: center;
+    padding-bottom: 1rem;
+    color: rgb(65, 158, 165);
+}
+
+/* .content__body {} */
+/* .content__description {} */
+
+/* == Rules for section table === */
+/* .content__table {} */
+.content__table-title {
+    font-size: 1.35rem;
+    font-weight: bolder;
+    color: rgb(161, 161, 39);
+}
+
+/* .content__table-body {} */
+
+/* Rules for footer elements */
+.footer__copy {
+    text-align: center;
+}
+
+/* === Media queries === */
+@media(min-width:768px) {
+    .nav__top {
+        border-top: 0 !important;
+    }
+}

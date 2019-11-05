@@ -11,8 +11,8 @@
         <div class="content__body">
             <p class="content__description"><?= $data['content_description'] ?></p>
             <!-- clients -->
-            <section class="content__table">
-                <h3 class="content__table-title ">All Clients</h3>
+            <section class="content__table mt-4">
+                <h3 class="content__table-title mb-3">All Clients</h3>
                 <div class="content__table-body">
                     <?= $first_part;
                     Helper::makeTable("clients", $dataModel);
@@ -20,8 +20,8 @@
                 </div>
             </section>
 
-            <section class="content__table">
-                <h3 class="content__table-title">All Suppliers</h3>
+            <section class="content__table mt-4">
+                <h3 class="content__table-title mb-3">All Suppliers</h3>
                 <div class="content__table-body">
                     <?= $first_part;
                     Helper::makeTable("supplier", $dataModel);
