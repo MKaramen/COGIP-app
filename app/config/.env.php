@@ -28,7 +28,7 @@ define('APP_PARAMS', array(
     # Database parameters
     'DB_DRIVER'   => 'mysql',         # Data source name (DSN)
     'DB_HOST'     => 'database',     # Database host
-    'DB_NAME'     => 'cogip_test',    # Database name
+    'DB_NAME'     => 'cogip',    # Database name
     'DB_USERNAME' => 'root',          # Database user
     'DB_PASSWORD' => 'root',              # Database password
 
