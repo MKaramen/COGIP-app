@@ -13,9 +13,15 @@
         <div class="content__body">
             <p class="content__description"><?= $data['content_description'] ?></p>
         </div>
-        <?= $first_part;
-        Helper::makeTable("users", $dataModel);
-        echo $second_part; ?>
+
+        <section class="content__table">
+            <h3 class="content__table-title">All users</h3>
+            <div class="content__table-body">
+                <?= $first_part;
+                Helper::makeTable("users", $dataModel);
+                echo $second_part; ?>
+            </div>
+        </section>
 
 
     </section>

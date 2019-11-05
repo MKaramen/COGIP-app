@@ -14,24 +14,24 @@ class PagesModel extends Model
     public function index(): array
     {
         // Request for First table - WORKS 
-        $request_firstTable = 'SELECT invoice_number, invoice_date, company.company_name FROM invoice INNER JOIN company ON invoice_fk_company = company.id ORDER BY invoice_date';
+        $request_firstTable = 'SELECT invoice_number, invoice_date, company.company_name FROM invoice INNER JOIN company ON invoice_fk_company = company.id ORDER BY invoice_date LIMIT 5';
         $result_firstTable = $this->getData($request_firstTable);
         $result_global['last_invoice']['row'] = $result_firstTable;
-        $result_global['last_invoice']['col'] = array("Invoice Number", "Date", "Comapny");
+        $result_global['last_invoice']['col'] = array("Id", "Invoice Number", "Date", "Company");
         // Helper::dump($result_firstTable);
 
         // Request for double table - WORKS 
-        $request_secondTable = 'SELECT people_fullName, people_email, people_phone, people_company FROM people';
+        $request_secondTable = 'SELECT people_fullName, people_email, people_phone, people_company FROM people LIMIT 5';
         $result_secondTable = $this->getData($request_secondTable);
         $result_global['last_contact']['row'] = $result_secondTable;
-        $result_global['last_contact']['col'] = array("Name", "Email", "Phone", "Company");
+        $result_global['last_contact']['col'] = array("Id", "Name", "Email", "Phone", "Company");
         // Helper::dump($result_secondTable);
 
         // Request Third table - WORKS 
-        $request_thirdTable = 'SELECT company_name, company_tva, company_country, type.type FROM company INNER JOIN type ON company.company_fk_type = type.id ';
+        $request_thirdTable = 'SELECT company_name, company_tva, company_country, type.type FROM company INNER JOIN type ON company.company_fk_type = type.id LIMIT 5';
         $result_thirdTable = $this->getData($request_thirdTable);
         $result_global['last_company']['row'] = $result_thirdTable;
-        $result_global['last_company']['col'] = array("Company", "TVA", "Country");
+        $result_global['last_company']['col'] = array("Id", "Company", "TVA", "Country", "Type");
         // Helper::dump($result_thirdTable);
 
 
@@ -62,7 +62,7 @@ class PagesModel extends Model
     public function companies(): array
     {
         // Clients
-        $request_client = 'SELECT company_name, company_tva, company_country FROM company WHERE company_fk_type=2;';
+        $request_client = 'SELECT company_name, company_tva, company_country FROM company WHERE company_fk_type=2 ORDER BY company_name;';
         $result_client = $this->getData($request_client);
         // $resultat_global['client']['row'] = $result_client;
         $result_global['clients']['row'] = $result_client;
@@ -70,7 +70,7 @@ class PagesModel extends Model
         // return $result_global;
 
         // Supplier
-        $request_supplier = 'SELECT company_name, company_tva, company_country FROM company WHERE company_fk_type=1;';
+        $request_supplier = 'SELECT company_name, company_tva, company_country FROM company WHERE company_fk_type=1 ORDER BY company_name;';
         $result_supplier = $this->getData($request_supplier);
         $result_global['supplier']['row'] = $result_supplier;
         $result_global['supplier']['col'] = array("Id", "Company", "TVA number", "Country");

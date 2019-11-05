@@ -10,15 +10,24 @@
         <h2 class="content__title"><?= $data['content_title'] ?></h2>
         <div class="content__body">
             <p class="content__description"><?= $data['content_description'] ?></p>
-
             <!-- clients -->
-            <?= $first_part;
-            Helper::makeTable("clients", $dataModel);
-            echo $second_part; ?>
+            <section class="content__table">
+                <h3 class="content__table-title ">All Clients</h3>
+                <div class="content__table-body">
+                    <?= $first_part;
+                    Helper::makeTable("clients", $dataModel);
+                    echo $second_part; ?>
+                </div>
+            </section>
 
-            <?= $first_part;
-            Helper::makeTable("supplier", $dataModel);
-            echo $second_part; ?>
+            <section class="content__table">
+                <h3 class="content__table-title">All Suppliers</h3>
+                <div class="content__table-body">
+                    <?= $first_part;
+                    Helper::makeTable("supplier", $dataModel);
+                    echo $second_part; ?>
+                </div>
+            </section>
 
         </div>
     </section>
