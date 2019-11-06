@@ -16,9 +16,9 @@ abstract class Controller
     }
 
     /* Load view */
-    public function view(string $view, array $data= []): void
+    public function view(string $view, array $dataInfo=[], array $dataModel=[]): void
     {
-        Helper::view($view, $data);     // require view file
+        Helper::view($view, $dataInfo, $dataModel);     // require view file
     }
 
     /**
@@ -38,7 +38,7 @@ abstract class Controller
     }
 
     /* Before filter - called before an action method */
-    protected function before()
+    protected function before(): bool
     {
         return True;
     }

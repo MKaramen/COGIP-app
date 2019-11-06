@@ -17,45 +17,53 @@ class PagesController extends Controller
 
     public function index(): void
     {
-        $data = array(
+        $dataInfo = array(
             'title'               => 'Home',
             'content_title'       => 'Welcome to the COGIP', 
             'content_description' => 'Bonjour !',
         );
 
-        $this->view('pages/index', $data);
+        $dataModel = $this->currentModel->index();
+
+        $this->view('pages/index', $dataInfo, $dataModel);
     }
 
     public function users(): void
     {
-        $data = array(
+        $dataInfo = array(
             'title'               => 'Users',
             'content_title'       => 'COGIP: Users directory', 
             'content_description' => 'Bonjour !',
         );
 
-        $this->view('pages/users', $data);
+        $dataModel = $this->currentModel->users();
+
+        $this->view('pages/users', $dataInfo, $dataModel);
     }
 
     public function invoices(): void
     {
-        $data = array(
+        $dataInfo = array(
             'title'               => 'Invoices',
             'content_title'       => 'COGIP: List of invoices', 
             'content_description' => 'Bonjour !',
         );
 
-        $this->view('pages/invoices', $data);
+        $dataModel = $this->currentModel->invoices();
+
+        $this->view('pages/invoices', $dataInfo, $dataModel);
     }
 
     public function companies(): void
     {
-        $data = array(
+        $dataInfo = array(
             'title'               => 'Companies',
             'content_title'       => 'COGIP: Companies directory', 
             'content_description' => 'Bonjour !',
         );
 
-        $this->view('pages/companies', $data);
+        $dataModel = $this->currentModel->companies();
+        
+        $this->view('pages/companies', $dataInfo, $dataModel);
     }
 }
