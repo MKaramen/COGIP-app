@@ -42,6 +42,15 @@ class AdminModel extends Database
         // echo $request;
     }
 
-    public function delete_content(): void
-    { }
+    public function delete_content($table_name, $id): void
+    {
+        $request = "DELETE FROM $table_name WHERE id=$id";
+        self::deleteData($request);
+    }
+
+    public function update_content($table_name, $id): void
+    {
+        $request = "UPDATE FROM $table_name WHERE id=$id";
+        self::update_content($request);
+    }
 }

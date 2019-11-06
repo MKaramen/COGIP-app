@@ -66,7 +66,7 @@ class Database
     }
     // DELETE DATA 
     // $deleteData = $db->exec('DELETE FROM name_of_table WHERE condition');
-    public function deleteData($name_of_table, $condition)
+    public function deleteData($request)
     {
         $this->connectDb();
         $req = $this->db->query($request);

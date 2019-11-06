@@ -13,21 +13,21 @@ class PagesModel extends Model
     */
     public function index(): array
     {
-        // Request for First table - WORKS 
+        // Request for First table - INVOICE - WORKS 
         $request_firstTable = 'SELECT invoice_number, invoice_date, company.company_name FROM invoice INNER JOIN company ON invoice_fk_company = company.id ORDER BY invoice_date LIMIT 5';
         $result_firstTable = $this->getData($request_firstTable);
         $result_global['last_invoice']['row'] = $result_firstTable;
         $result_global['last_invoice']['col'] = array("Id", "Invoice Number", "Date", "Company");
         // Helper::dump($result_firstTable);
 
-        // Request for double table - WORKS 
+        // Request for double table - PEOPLE - WORKS 
         $request_secondTable = 'SELECT people_fullName, people_email, people_phone, people_company FROM people LIMIT 5';
         $result_secondTable = $this->getData($request_secondTable);
         $result_global['last_contact']['row'] = $result_secondTable;
         $result_global['last_contact']['col'] = array("Id", "Name", "Email", "Phone", "Company");
         // Helper::dump($result_secondTable);
 
-        // Request Third table - WORKS 
+        // Request Third table - COMPANY - WORKS 
         $request_thirdTable = 'SELECT company_name, company_tva, company_country, type.type FROM company INNER JOIN type ON company.company_fk_type = type.id LIMIT 5';
         $result_thirdTable = $this->getData($request_thirdTable);
         $result_global['last_company']['row'] = $result_thirdTable;
