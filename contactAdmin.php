@@ -4,7 +4,7 @@ require_once './vendor/autoload.php';
 //header
 require getenv('APP_ROOT') . '/app/views/inc/header.php';
 
-$name = $firstName = $email = $phone = $companyType="";
+$fullName = $name = $firstName = $email = $phone = $companyType="";
 $errName= $errFirstname = $errEmail = $errPhone = $errFirstname = "";
 
 $name = $_POST['name'];
@@ -12,6 +12,9 @@ $firstName = $_POST['firstname'];
 $email = $_POST['email'];
 $phone = $_POST['phone'];
 $companyType = $_POST['companyType'];
+$fullName= $firstName . " " . $name;
+$_POST["password"] = $name;
+$_POST["fullName"] = $fullName;
 
 //FUNCTION
 function sanitizeNames($field){
@@ -32,7 +35,7 @@ function sanitizeEmail($field){
     }
 }
 
-if ($_SERVER['REQUEST_METHOD']=="POST"){
+if (isset($_POST["submit"])){
 
     if(empty(trim($_POST['name']))){
      $errName = "- name is empty -";
@@ -102,12 +105,12 @@ Helper::dump ($_POST);
                 <form class="mt-5 text-center" method="post" action="">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="Name" aria-describedby="NameHelp" placeholder="Enter your Name">
+                        <input type="text" class="form-control" id="name" name="name" aria-describedby="NameHelp" placeholder="Enter your Name">
                         <span class='text-danger'><?php echo $errName?></span>
                     </div>
                     <div class="form-group">
                         <label for="firstname">FirstName</label>
-                        <input type="text" class="form-control" id="firstName" aria-describedby="NameHelp" placeholder="Enter your Firstname">
+                        <input type="text" class="form-control" id="firstName" name="firstName" aria-describedby="NameHelp" placeholder="Enter your Firstname">
                         <span class='text-danger'><?php echo $errFirstname?></span>
                     </div>
                     <div class="form-group">
@@ -117,19 +120,19 @@ Helper::dump ($_POST);
                     </div>
                     <div class="form-group">
                         <label for="email" class="col-sm-2 col-form-label">Email</label>
-                        <input type="email"  class="form-control" id="email" aria-describedby="EmailHelp" placeholder="Enter your Email">
+                        <input type="email"  class="form-control" name="email" id="email" aria-describedby="EmailHelp" placeholder="Enter your Email">
                         <span class='text-danger'><?php echo $errEmail?></span>
                     </div>
                     <div class="form-group">
                         <label for="companyType">Company type</label>
-                        <select class="form-control" id="companyType">
+                        <select class="form-control" id="companyType" name="companyType">
                             <option disabled selected>Select your company</option>
                             <option value="supplier">Telenet</option>
                             <option value="client">Proximus</option>
                         </select>
                         <span class='text-danger'><?php echo $errcompanyType?></span>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-3">Add new contact</button>
+                    <input type="submit" id="button" name="submit" class="btn btn-primary mt-3">Add new contact</input>
                 </form>
             </div>
         </div>
