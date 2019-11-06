@@ -29,29 +29,29 @@
     <div class="collapse navbar-collapse d-felx justify-content-end align-self-start" id="hidden-nav">
         <ul class="navbar-nav border-top py-3 py-md-0 nav__top">
             <li class="nav-item text-md-center">
-                <a class="nav-link <?php if ($data['title'] == 'Home') echo 'nav-link--active'?>" 
+                <a class="nav-link <?php if ($dataInfo['title'] == 'Home') echo 'nav-link--active'?>" 
                     href="<?=getenv('APP_URL')?>">
                     <i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php if ($data['title'] == 'Users') echo 'nav-link--active'?>" 
+                <a class="nav-link <?php if ($dataInfo['title'] == 'Users') echo 'nav-link--active'?>" 
                     href="<?=getenv('APP_URL')?>/pages/users">
                     <i class="fas fa-users"></i> Users</a>
             </li>
             <li class="nav-item text-md-center">
-                <a class="nav-link <?php if ($data['title'] == 'Invoices') echo 'nav-link--active'?>" 
+                <a class="nav-link <?php if ($dataInfo['title'] == 'Invoices') echo 'nav-link--active'?>" 
                     href="<?=getenv('APP_URL')?>/pages/invoices">
                     <i class="fas fa-file-invoice"></i> Invoices</a>
             </li>
             <li class="nav-item text-md-center">
-                <a class="nav-link <?php if ($data['title'] == 'Companies') echo 'nav-link--active'?>" 
+                <a class="nav-link <?php if ($dataInfo['title'] == 'Companies') echo 'nav-link--active'?>" 
                     href="<?=getenv('APP_URL')?>/pages/companies">
                     <i class="far fa-registered"></i> Companies</a>
             </li>
             <li class="nav-item text-md-center">
-                <a class="nav-link <?php if ($data['title'] == 'Admin') echo 'nav-link--active'?>" 
-                    href="<?=getenv('APP_URL')?>/admin/index">
-                    <i class="fas fa-user-lock"></i> Admin</a>
+                <a class="nav-link <?php if ($dataInfo['title'] == 'Login') echo 'nav-link--active'?>" 
+                    href="<?=getenv('APP_URL')?>/admin/login">
+                    <i class="fas fa-user-lock"></i> Login</a>
             </li> 
         </ul>
     </div> 
