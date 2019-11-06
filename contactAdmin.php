@@ -4,8 +4,8 @@ require_once './vendor/autoload.php';
 //header
 require getenv('APP_ROOT') . '/app/views/inc/header.php';
 
-$fullName = $name = $firstName = $email = $phone = $companyType="";
-$errName= $errFirstname = $errEmail = $errPhone = $errFirstname = "";
+$fullName = $name = $firstName = $email = $phone = $companyType= $acces ="";
+$errName= $errFirstname = $errEmail = $errPhone = $errFirstname = $errcompanyType = $erracces = "";
 
 $name = $_POST['people_name'];
 $firstName = $_POST['people_firstName'];
@@ -15,6 +15,7 @@ $companyType = $_POST['people_company'];
 $fullName= $firstName . " " . $name;
 $_POST["people_password"] = $name;
 $_POST["people_fullName"] = $fullName;
+$acces = $_POST['people_acces'];
 
 //FUNCTION
 function sanitizeNames($field){
@@ -82,6 +83,9 @@ if (isset($_POST["submit"])){
 
     if(empty(trim($_POST['people_companyType']))){
         $errcompanyType = "- Company is empty -";
+    }
+    if(empty(trim($_POST['people_acces']))){
+        $erracces = "- Acces is empty -";
     }
 }
 
