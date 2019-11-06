@@ -4,49 +4,15 @@ require_once './vendor/autoload.php';
 //header
 require getenv('APP_ROOT') . '/app/views/inc/header.php';
 
-$Name = $Firstname = $Email = $Phone = $companyType="";
+$name = $firstName = $email = $phone = $companyType="";
 $errName= $errFirstname = $errEmail = $errPhone = $errFirstname = "";
 
-$Name = $_POST['Name'];
-$Firstname = $_POST['Firstname'];
-$Email = $_POST['Email'];
-$Phone = $_POST['Phone'];
+$name = $_POST['name'];
+$firstName = $_POST['firstname'];
+$email = $_POST['email'];
+$phone = $_POST['phone'];
 $companyType = $_POST['companyType'];
 
-if ($_SERVER['REQUEST_METHOD']=="POST"){
-
-    if(empty(trim($_POST['Name']))){
-     $errName = "- name is empty -";
-    } else {
-		    $Name = sanitizeNames($_POST['Name']);
-		    if ($Name == FALSE){
-		    	$errName = " Name is not valid";
-		    }
-	}
-    if(empty(trim($_POST['Firstame']))){
-        $errFirstname = "- Firstname is empty -";
-       } else {
-		    $Firstname = sanitizeNames($_POST['Firstname']);
-		    if ($Firstname == FALSE){
-		    	$errFirstname = " Firstname is not valid";
-		    }
-	}
-    if(empty(trim($_POST['Email']))){
-        $errEmail = "- Email is empty -";
-    } else {
-		$Email = sanitizeEmail($_POST['Email']);
-		if ($Email == FALSE){
-			$errEmail = " Email adress is not valid";
-		}
-	}
-    if(empty(trim($_POST['Phone']))){
-        $errPhone = "- phone is empty -";
-    }
-
-    if(empty(trim($_POST['companyType']))){
-        $errcompanyType = "- Company is empty -";
-    }
-}
 //FUNCTION
 function sanitizeNames($field){
 	$field = filter_var(trim($field), FILTER_SANITIZE_STRING);
@@ -66,11 +32,47 @@ function sanitizeEmail($field){
     }
 }
 
-$sql ="INSERT INTO people (poeple_fullName,people_email,people_phone,
-people_company)
-VALUES ('$Name','$Email','$Phone')";
+if ($_SERVER['REQUEST_METHOD']=="POST"){
+
+    if(empty(trim($_POST['name']))){
+     $errName = "- name is empty -";
+    } else {
+		    $name = sanitizeNames($_POST['name']);
+		    if ($name == FALSE){
+		    	$errName = " Name is not valid";
+		    }
+	}
+    if(empty(trim($_POST['firstName']))){
+        $errFirstname = "- Firstname is empty -";
+       } else {
+		    $firstName = sanitizeNames($_POST['firstName']);
+		    if ($firstName == FALSE){
+		    	$errFirstname = " Firstname is not valid";
+		    }
+	}
+    if(empty(trim($_POST['email']))){
+        $errEmail = "- Email is empty -";
+    } else {
+		$email = sanitizeEmail($_POST['email']);
+		if ($email == FALSE){
+			$errEmail = " Email adress is not valid";
+		}
+	}
+    if(empty(trim($_POST['phone']))){
+        $errPhone = "- phone is empty -";
+    }
+
+    if(empty(trim($_POST['companyType']))){
+        $errcompanyType = "- Company is empty -";
+    }
+}
 
 
+// $sql ="INSERT INTO people (people_fullName,people_email,people_phone,
+// people_company)
+// VALUES ('$name','$email','$phone')";
+
+Helper::dump ($_POST);
 ?>
 
 
@@ -99,23 +101,23 @@ VALUES ('$Name','$Email','$Phone')";
                 <h1 class="text-center">Create New Contact</h1>
                 <form class="mt-5 text-center" method="post" action="">
                     <div class="form-group">
-                        <label for="Name">Name</label>
+                        <label for="name">Name</label>
                         <input type="text" class="form-control" id="Name" aria-describedby="NameHelp" placeholder="Enter your Name">
                         <span class='text-danger'><?php echo $errName?></span>
                     </div>
                     <div class="form-group">
-                        <label for="Firstname">FirstName</label>
-                        <input type="text" class="form-control" id="Firstname" aria-describedby="NameHelp" placeholder="Enter your Firstname">
+                        <label for="firstname">FirstName</label>
+                        <input type="text" class="form-control" id="firstName" aria-describedby="NameHelp" placeholder="Enter your Firstname">
                         <span class='text-danger'><?php echo $errFirstname?></span>
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone</label>
-                        <input type="text" name="Phone" maxlenght="10" class="form-control" id="Phone" aria-describedby="phone" placeholder="Enter your phone number">
+                        <input type="text" name="phone" maxlenght="10" class="form-control" id="phone" aria-describedby="phone" placeholder="Enter your phone number">
                         <span class='text-danger'><?php echo $errPhone?></span>
                     </div>
                     <div class="form-group">
-                        <label for="Email" class="col-sm-2 col-form-label">Email</label>
-                        <input type="email"  class="form-control" id="Email" aria-describedby="EmailHelp" placeholder="Enter your Email">
+                        <label for="email" class="col-sm-2 col-form-label">Email</label>
+                        <input type="email"  class="form-control" id="email" aria-describedby="EmailHelp" placeholder="Enter your Email">
                         <span class='text-danger'><?php echo $errEmail?></span>
                     </div>
                     <div class="form-group">

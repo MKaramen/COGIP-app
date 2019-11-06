@@ -3,6 +3,11 @@ require_once './app/config/.env.php';
 require_once './vendor/autoload.php';
 //header
 require getenv('APP_ROOT') . '/app/views/inc/header.php';
+
+$companyName = $tva = $Phone = $companyType = "";
+$errcompanyName = $errtva = $errPhone = $errcompanyType = "";
+
+
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +29,7 @@ require getenv('APP_ROOT') . '/app/views/inc/header.php';
                 <form class="mt-5 text-center" method="post" action="">
                     <div class="form-group">
                         <label for="companyName">Company name</label>
-                        <select class="form-control" id="companyType">
+                        <select class="form-control" id="companyName">
                             <option disabled selected>Select your company</option>
                             <option value="companyName">Telenet</option>
                             <option value="companyName">Proximus</option>
