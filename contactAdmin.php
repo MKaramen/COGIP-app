@@ -146,6 +146,15 @@ if (isset($_POST["submit"])){
                         </select>
                         <span class='text-danger'><?php echo $errcompanyType?></span>
                     </div>
+                    <div class="form-group">
+                        <label for="people_acces">Acces</label>
+                        <select class="form-control" id="acces" name="people_acces">
+                            <option value="user">User</option>
+                            <option value="modo">Modo</option>
+                            <option value="god">God Mode</option>
+                        </select>
+                        <span class='text-danger'><?php echo $errcompanyType?></span>
+                    </div>
                     <button type="submit" id="submit" name="submit" class="btn btn-primary mt-3">Add new contact</button>
                 </form>
             </div>
