@@ -5,13 +5,13 @@ require_once './vendor/autoload.php';
 require getenv('APP_ROOT') . '/app/views/inc/header.php';
 
 $fullName = $name = $firstName = $email = $phone = $companyType= $acces ="";
-$errName= $errFirstname = $errEmail = $errPhone = $errFirstname = $errcompanyType = $erracces = "";
+$errName= $errFirstname = $errEmail = $errPhone = $errFirstname = $errcompany = $erracces = "";
 
 $name = $_POST['people_name'];
 $firstName = $_POST['people_firstName'];
 $email = $_POST['people_email'];
 $phone = $_POST['people_phone'];
-$companyType = $_POST['people_company'];
+$company = $_POST['people_company'];
 $fullName= $firstName . " " . $name;
 $_POST["people_password"] = $name;
 $_POST["people_fullName"] = $fullName;
@@ -77,15 +77,12 @@ if (isset($_POST["submit"])){
     } else {
         $phone = sanitizePhone($_POST['people_phone']);
         if ($phone == FALSE){
-            $errPhone = "- phone number is not valid";
+            $errPhone = "- phone number is not valid -";
         }
     }
 
-    if(empty(trim($_POST['people_companyType']))){
-        $errcompanyType = "- Company is empty -";
-    }
-    if(empty(trim($_POST['people_acces']))){
-        $erracces = "- Acces is empty -";
+    if(empty(trim($_POST['people_company']))){
+        $errcompany = "- Company is not choose -";
     }
 }
 
@@ -124,7 +121,7 @@ if (isset($_POST["submit"])){
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone</label>
-                        <input type="text" name="people_phone" maxlenght="10" class="form-control" id="phone" aria-describedby="phone" placeholder="Enter your phone number">
+                        <input type="text" name="people_phone" minlength="10" maxlength="10" class="form-control" id="phone" aria-describedby="phone" placeholder="Enter your phone number">
                         <span class='text-danger'><?php echo $errPhone?></span>
                     </div>
                     <div class="form-group">
@@ -133,22 +130,13 @@ if (isset($_POST["submit"])){
                         <span class='text-danger'><?php echo $errEmail?></span>
                     </div>
                     <div class="form-group">
-                        <label for="companyType">Company</label>
-                        <select class="form-control" id="companyType" name="people_companyType">
+                        <label for="people_company">Company</label>
+                        <select class="form-control" id="people_company" name="people_company">
                             <option disabled selected>Select your company</option>
                             <option value="Telenet">Telenet</option>
                             <option value="Proximus">Proximus</option>
                         </select>
-                        <span class='text-danger'><?php echo $errcompanyType?></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="companyType">Company type</label>
-                        <select class="form-control" id="companyType" name="people_companyType">
-                            <option disabled selected>Select your type</option>
-                            <option value="supplier">Supplier</option>
-                            <option value="client">Client</option>
-                        </select>
-                        <span class='text-danger'><?php echo $errcompanyType?></span>
+                        <span class='text-danger'><?php echo $errcompany?></span>
                     </div>
                     <div class="form-group">
                         <label for="people_acces">Acces</label>
@@ -157,7 +145,7 @@ if (isset($_POST["submit"])){
                             <option value="modo">Modo</option>
                             <option value="god">God Mode</option>
                         </select>
-                        <span class='text-danger'><?php echo $errcompanyType?></span>
+                        <span class='text-danger'><?php echo $erracces?></span>
                     </div>
                     <button type="submit" id="submit" name="submit" class="btn btn-primary mt-3">Add new contact</button>
                 </form>
