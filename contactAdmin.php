@@ -7,14 +7,14 @@ require getenv('APP_ROOT') . '/app/views/inc/header.php';
 $fullName = $name = $firstName = $email = $phone = $companyType="";
 $errName= $errFirstname = $errEmail = $errPhone = $errFirstname = "";
 
-$name = $_POST['name'];
-$firstName = $_POST['firstname'];
-$email = $_POST['email'];
-$phone = $_POST['phone'];
-$companyType = $_POST['companyType'];
+$name = $_POST['people_name'];
+$firstName = $_POST['people_firstName'];
+$email = $_POST['people_email'];
+$phone = $_POST['people_phone'];
+$companyType = $_POST['people_company'];
 $fullName= $firstName . " " . $name;
-$_POST["password"] = $name;
-$_POST["fullName"] = $fullName;
+$_POST["people_password"] = $name;
+$_POST["people_fullName"] = $fullName;
 
 //FUNCTION
 function sanitizeNames($field){
@@ -28,7 +28,17 @@ function sanitizeNames($field){
 }
 function sanitizeEmail($field){
     $field = filter_var(trim($field), FILTER_SANITIZE_EMAIL);
+
     if(filter_var($field, FILTER_VALIDATE_EMAIL)){
+        return $field;
+    } else{
+        return FALSE;
+    }
+}
+function sanitizePhone($field){
+    $field= filter_var(trim($field), FILTER_SANITIZE_NUMBER_INT);
+
+    if(filter_var($field, FILTER_VALIDATE_INT)){
         return $field;
     } else{
         return FALSE;
@@ -37,35 +47,40 @@ function sanitizeEmail($field){
 
 if (isset($_POST["submit"])){
 
-    if(empty(trim($_POST['name']))){
+    if(empty(trim($_POST['people_name']))){
      $errName = "- name is empty -";
     } else {
-		    $name = sanitizeNames($_POST['name']);
+		    $name = sanitizeNames($_POST['people_name']);
 		    if ($name == FALSE){
 		    	$errName = " Name is not valid";
 		    }
 	}
-    if(empty(trim($_POST['firstName']))){
+    if(empty(trim($_POST['people_firstName']))){
         $errFirstname = "- Firstname is empty -";
        } else {
-		    $firstName = sanitizeNames($_POST['firstName']);
+		    $firstName = sanitizeNames($_POST['people_firstName']);
 		    if ($firstName == FALSE){
 		    	$errFirstname = " Firstname is not valid";
 		    }
 	}
-    if(empty(trim($_POST['email']))){
+    if(empty(trim($_POST['people_email']))){
         $errEmail = "- Email is empty -";
     } else {
-		$email = sanitizeEmail($_POST['email']);
+		$email = sanitizeEmail($_POST['people_email']);
 		if ($email == FALSE){
 			$errEmail = " Email adress is not valid";
 		}
 	}
-    if(empty(trim($_POST['phone']))){
+    if(empty(trim($_POST['people_phone']))){
         $errPhone = "- phone is empty -";
+    } else {
+        $phone = sanitizePhone($_POST['people_phone']);
+        if ($phone == FALSE){
+            $errPhone = "- phone number is not valid";
+        }
     }
 
-    if(empty(trim($_POST['companyType']))){
+    if(empty(trim($_POST['people_companyType']))){
         $errcompanyType = "- Company is empty -";
     }
 }
@@ -74,17 +89,7 @@ if (isset($_POST["submit"])){
 // $sql ="INSERT INTO people (people_fullName,people_email,people_phone,
 // people_company)
 // VALUES ('$name','$email','$phone')";
-
-Helper::dump ($_POST);
 ?>
-
-
-
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -105,34 +110,43 @@ Helper::dump ($_POST);
                 <form class="mt-5 text-center" method="post" action="">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" aria-describedby="NameHelp" placeholder="Enter your Name">
+                        <input type="text" class="form-control" id="name" name="people_name" aria-describedby="NameHelp" placeholder="Enter your Name">
                         <span class='text-danger'><?php echo $errName?></span>
                     </div>
                     <div class="form-group">
                         <label for="firstname">FirstName</label>
-                        <input type="text" class="form-control" id="firstName" name="firstName" aria-describedby="NameHelp" placeholder="Enter your Firstname">
+                        <input type="text" class="form-control" id="firstName" name="people_firstName" aria-describedby="NameHelp" placeholder="Enter your Firstname">
                         <span class='text-danger'><?php echo $errFirstname?></span>
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone</label>
-                        <input type="text" name="phone" maxlenght="10" class="form-control" id="phone" aria-describedby="phone" placeholder="Enter your phone number">
+                        <input type="text" name="people_phone" maxlenght="10" class="form-control" id="phone" aria-describedby="phone" placeholder="Enter your phone number">
                         <span class='text-danger'><?php echo $errPhone?></span>
                     </div>
                     <div class="form-group">
                         <label for="email" class="col-sm-2 col-form-label">Email</label>
-                        <input type="email"  class="form-control" name="email" id="email" aria-describedby="EmailHelp" placeholder="Enter your Email">
+                        <input type="email"  class="form-control" name="people_email" id="email" aria-describedby="EmailHelp" placeholder="Enter your Email">
                         <span class='text-danger'><?php echo $errEmail?></span>
                     </div>
                     <div class="form-group">
-                        <label for="companyType">Company type</label>
-                        <select class="form-control" id="companyType" name="companyType">
+                        <label for="companyType">Company</label>
+                        <select class="form-control" id="companyType" name="people_companyType">
                             <option disabled selected>Select your company</option>
-                            <option value="supplier">Telenet</option>
-                            <option value="client">Proximus</option>
+                            <option value="Telenet">Telenet</option>
+                            <option value="Proximus">Proximus</option>
                         </select>
                         <span class='text-danger'><?php echo $errcompanyType?></span>
                     </div>
-                    <input type="submit" id="button" name="submit" class="btn btn-primary mt-3">Add new contact</input>
+                    <div class="form-group">
+                        <label for="companyType">Company type</label>
+                        <select class="form-control" id="companyType" name="people_companyType">
+                            <option disabled selected>Select your type</option>
+                            <option value="supplier">Supplier</option>
+                            <option value="client">Client</option>
+                        </select>
+                        <span class='text-danger'><?php echo $errcompanyType?></span>
+                    </div>
+                    <button type="submit" id="submit" name="submit" class="btn btn-primary mt-3">Add new contact</button>
                 </form>
             </div>
         </div>
@@ -142,5 +156,5 @@ Helper::dump ($_POST);
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 <!-- footer content -->
-<?php require getenv('APP_ROOT') . '/app/views/inc/footer.php' ?>
+<?php require getenv('APP_ROOT') . '/app/views/inc/footer.php' ;?>
 </html> 
