@@ -4,38 +4,43 @@ declare(strict_types=1);
 
 /*
  * Database Class
- *   - connect to the Database
+ *   - connect to the database
  *   - create prepared stmts
  *   - bind Values
- *   - return Rows and Results
+ *   - return rows and results
  */
+
 class Database 
 {
 
-    private $driver   = 'mysql';
-    private $host	  = 'localhost';
-	private $username = 'root';
-	private $password = '';
-    private $dbname	  = 'cogip_test';
-    private $options  = array(
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    );
-
-    private $stmt;
-    protected $con;
+    private $db_driver;
+    private $db_host;
+    private $db_username;
+    private $db_password;
+    private $db_name;
+    private $db_options;
+    protected $db;
 
     public function __construct() 
     {
-        $this->dsn = "{$this->driver}:host={$this->host};dbname={$this->dbname};charset=utf8"; 
+        $this->db_driver   = getenv('DB_DRIVER');
+        $this->db_host	   = getenv('DB_HOST');
+        $this->db_username = getenv('DB_USERNAME');
+        $this->db_password = getenv('DB_PASSWORD');
+        $this->db_name	   = getenv('DB_NAME');
+        $this->db_options  = array(
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        );
+        $this->db_dsn = "{$this->db_driver}:host={$this->db_host};dbname={$this->db_name};charset=utf8"; 
     }
 
-    protected function open() 
+    public function open(): void
     {
         try 
         {
-            $this->con = null;
-            $this->con = new PDO($this->dsn, $this->username, $this->password, $this->options);
+            $this->close();
+            $this->db = new PDO($this->db_dsn, $this->db_username, $this->db_password, $this->db_options);
         } 
         catch (PDOException $e) 
         {
@@ -43,16 +48,37 @@ class Database
         }
     }
 
-    protected function close() {
-        $this->con = null;
-	}
+    public function close(): void
+    {
+        $this->db = null;
+    }
+    
+    public function select(string $sql): array
+    {
+        $out = [];
+        $this->open();
+        $response = $this->db->query($sql);
 
-    protected function insert($query, $bindings=[])
+        $nbr = 1;
+        while ($row = $response->fetch()) 
+        {
+            $out[] = array_merge(array('nbr' => $nbr), $row);
+            $nbr++;
+        }
+        $this->close();
+
+        return $out;
+    }
+
+    public function insert($query, $bindings=[])
     {
 
     }
 
-    public function update($query, $bindings = []);
+    public function update($query, $bindings=[]) 
+    {
+
+    }
 
     /**
      * Run a delete statement against the database.
@@ -61,7 +87,10 @@ class Database
      * @param  array   $bindings
      * @return int
      */
-    public function delete($query, $bindings=[]);
+    public function delete($query, $bindings=[]) 
+    {
+
+    }
 
     /**
      * Execute an SQL statement and return the boolean result.
