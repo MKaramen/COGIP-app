@@ -73,7 +73,7 @@ if (isset($_POST["submit"])){
 		}
 	}
     if(empty(trim($_POST['people_phone']))){
-        $errPhone = "- phone is empty -";
+        $errPhone = "- phone number is empty -";
     } else {
         $phone = sanitizePhone($_POST['people_phone']);
         if ($phone == FALSE){
