@@ -58,6 +58,16 @@ class Helper
         }
         echo "</tbody>";
     }
+
+    // Get all $_POST 
+    public static function getPost(): array
+    {
+        $out = [];
+        if (isset($_POST)) {
+            $out = $_POST;
+        }
+        return $out;
+    }
 }
 
 

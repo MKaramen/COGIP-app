@@ -48,19 +48,19 @@ class Database
     }
     // INSERT Data
     // $insertData = $db->exec('INSERT INTO name_of_table($colums) VALUES ($valuesToInsert)');
-    public function insertData($name_of_table, $columns, $valuesToInsert)
+    public function insertData($request)
     {
         $this->connectDb();
-        $req = $this->db->query("INSERT INTO $name_of_table($columns) VALUES($valuesToInsert)");
+        $req = $this->db->query($request);
         $this->closeDb();
         return $req;
     }
     //UPDATE DATA 
     // $updateData = $db->exec('UPDATE name_of_table SET newValueToSet WHERE condition');
-    public function updateData($name_of_table, $newValueToSet, $condition)
+    public function updateData($request)
     {
         $this->connectDb();
-        $req = $this->db->query("UPDATE $name_of_table SET $newValueToSet WHERE $condition");
+        $req = $this->db->query($request);
         $this->closeDb();
         return $req;
     }
@@ -69,8 +69,22 @@ class Database
     public function deleteData($name_of_table, $condition)
     {
         $this->connectDb();
-        $req = $this->db->query("DELETE FROM $name_of_table WHERE $condition");
+        $req = $this->db->query($request);
         $this->closeDb();
         return $req;
+    }
+
+    public static function stringKeys($array)
+    {
+
+        $string = implode(", ", $array);
+        return $string;
+    }
+
+    public static function stringValues($array)
+    {
+
+        $string = '"' . implode('","', $array) . '"';
+        return $string;
     }
 }
