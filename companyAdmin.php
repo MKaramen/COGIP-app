@@ -26,7 +26,7 @@ function sanitizeNames($field){
 function sanitizePhone($field){
     $field= filter_var(trim($field), FILTER_SANITIZE_NUMBER_INT);
 
-    if(filter_var($field, FILTER_VALIDATE_INT)){
+    if(filter_var($field, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>'#^[0-9]{10}$#')))){
         return $field;
     } else{
         return FALSE;
