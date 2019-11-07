@@ -143,9 +143,9 @@ if (isset($_POST["submit"])){
                     <div class="form-group">
                         <label for="people_acces">Acces</label>
                         <select class="form-control" id="acces" name="people_acces">
-                            <option value="user">User</option>
-                            <option value="modo">Modo</option>
-                            <option value="god">God Mode</option>
+                            <option value="user">user</option>
+                            <option value="modo">moderator</option>
+                            <option value="god">god mode</option>
                         </select>
                         <span class='text-danger'><?php echo $erracces?></span>
                     </div>
