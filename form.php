@@ -157,7 +157,7 @@ if (isset($_POST["submit"])) {
 <!-- footer content -->
 <?php require getenv('APP_ROOT') . '/app/views/inc/footer.php';
 $b = new AdminModel;
-$b->new_user();
+$b->new_content("people");
 ?>
 
 </html>

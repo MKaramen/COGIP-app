@@ -24,7 +24,7 @@ class PagesController extends Controller
         );
 
         $dataModel = $this->currentModel->index();
-        $data = array_merge($data, $dataModel);
+        // $data = array_merge($data, $dataModel);
         $this->view('pages/index', $data, $dataModel);
     }
 
@@ -60,5 +60,55 @@ class PagesController extends Controller
 
         $dataModel = $this->currentModel->companies();
         $this->view('pages/companies', $data, $dataModel);
+    }
+
+    /* 
+        Function use for all the detail page  
+    */
+    public function company(): void
+    {
+        /* add company name etc*/
+        $data = array(
+            'title'              => 'Company',
+            'content_title'       => 'Company',
+            'content_description' => '',
+            'firsth3' => 'Contact Persons',
+            'secondh3' => 'Factures'
+        );
+
+        $dataModel = $this->currentModel->company();
+        // $data = array_merge($data, $dataModel);
+        $this->view('pages/company', $data, $dataModel);
+    }
+
+    public function user(): void
+    {
+        // Add name user to the title + in the content title 
+        $data = array(
+            'title'               => 'User',
+            'content_title'       => 'User',
+            'content_description' => '',
+            'firsth3' => 'User Informations',
+            'secondh3' => 'Related Invoice'
+        );
+
+        $dataModel = $this->currentModel->user();
+        // $data = array_merge($data, $dataModel);
+        $this->view('pages/user', $data, $dataModel);
+    }
+
+    public function invoice(): void
+    {
+        $data = array(
+            'title'               => 'Invoice',
+            'content_title'       => 'Invoice',
+            'content_description' => '',
+            'firsth3' => 'Company linked to the invoice',
+            'secondh3' => 'Contact Person'
+        );
+
+        $dataModel = $this->currentModel->invoice();
+        // $data = array_merge($data, $dataModel);
+        $this->view('pages/invoice', $data, $dataModel);
     }
 }

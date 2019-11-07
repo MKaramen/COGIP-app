@@ -39,8 +39,14 @@ class Helper
         echo "</pre>";
     }
 
+    /*
+        Create a table, make every single element clickable and it redirects the user to the right detail page 
+     */
     public static function makeTable($categoryName, $dataModel)
     {
+        // Var that will be used to redirect to the right page
+        $redirection_page;
+
         echo "<thead>";
         foreach ($dataModel[$categoryName]['col'] as $colName) {
             echo "<th>" . $colName . "</th>";
@@ -48,18 +54,29 @@ class Helper
         echo "</thead>";
 
         echo "<tbody>";
-        // Helper::dump($dataModel);
+
+        // Change value of the var 
+        if ($categoryName == "last_invoice" || $categoryName == "invoices") {
+            $redirection_page = "invoice";
+        } else if ($categoryName == "last_company" || $categoryName == "clients" || $categoryName == "suppliers") {
+            $redirection_page = "company";
+        } else {
+            $redirection_page = "user";
+        }
+
+        // Create all the col with the values and cliclable links
         foreach ($dataModel[$categoryName]['row'] as $user) {
             echo "<tr>";
             foreach ($user as $value) {
-                echo "<td>" . $value . "</td>";
+                echo '<td><a href="' . getenv('APP_URL') . '/pages/' . $redirection_page . '">' . $value . "</a></td>";
             }
             echo "</tr>";
         }
+
         echo "</tbody>";
     }
 
-    // Get all $_POST 
+    // Get all $_POST from the form page 
     public static function getPost(): array
     {
         $out = [];

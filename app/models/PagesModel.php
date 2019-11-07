@@ -77,4 +77,49 @@ class PagesModel extends Model
 
         return $result_global;
     }
+
+    /* 
+    Function for all the single page 
+    */
+    public function user(): array
+    {
+        // ADD WHERE ID = with GET 
+        // First Table - Get all data from the user 
+        $request = 'SELECT people_fullName, people_email, people_phone, people_company FROM people';
+        $result = $this->getData($request);
+        $result_global['user_info']['row'] = $result;
+        $result_global['user_info']['col'] = array("Id", "Name", "Email", "Phone Number", 'Company');
+
+
+        // Second table - Get all the invoices related to the user 
+        // ADD WHERE ID = user's id 
+        $request = 'SELECT invoice_number, invoice_date FROM invoice';
+        $result = $this->getData($request);
+        $result_global['user_invoices']['row'] = $result;
+        $result_global['user_invoices']['col'] = array("id", "Invoice Number", "Date");
+        return $result_global;
+    }
+
+    public function invoice(): array
+    {
+        // First table - A
+        $request = 'SELECT people_fullName, people_email, people_phone, people_company FROM people';
+        $result = $this->getData($request);
+        $result_global['users']['row'] = $result;
+        $result_global['users']['col'] = array("Id", "Name", "Email", "Phone Number", 'Company');
+        // Helper::dump($result);
+
+
+        return $result_global;
+    }
+
+    public function company(): array
+    {
+        $request = 'SELECT people_fullName, people_email, people_phone, people_company FROM people';
+        $result = $this->getData($request);
+        $result_global['users']['row'] = $result;
+        $result_global['users']['col'] = array("Id", "Name", "Email", "Phone Number", 'Company');
+        // Helper::dump($result);
+        return $result_global;
+    }
 }
