@@ -49,7 +49,7 @@ class Helper
 
         echo "<thead>";
         foreach ($dataModel[$categoryName]['col'] as $colName) {
-            echo "<th>" . $colName . "</th>";
+            echo "<th class='text-center'>" . $colName . "</th>";
         }
         echo "</thead>";
 
@@ -58,7 +58,7 @@ class Helper
         // Change value of the var 
         if ($categoryName == "last_invoice" || $categoryName == "invoices") {
             $redirection_page = "invoice";
-        } else if ($categoryName == "last_company" || $categoryName == "clients" || $categoryName == "suppliers") {
+        } else if ($categoryName == "last_company" || $categoryName == "clients" || $categoryName == "supplier") {
             $redirection_page = "company";
         } else {
             $redirection_page = "user";
@@ -67,8 +67,10 @@ class Helper
         // Create all the col with the values and cliclable links
         foreach ($dataModel[$categoryName]['row'] as $user) {
             echo "<tr>";
-            foreach ($user as $value) {
-                echo '<td><a href="' . getenv('APP_URL') . '/pages/' . $redirection_page . '">' . $value . "</a></td>";
+            foreach ($user as $key => $value) {
+                if ($key != "id") {
+                    echo '<td class="text-center"><a href="' . getenv('APP_URL') . '/pages/' . $redirection_page . '">' . $value . "</a></td>";
+                }
             }
             echo "</tr>";
         }

@@ -83,17 +83,18 @@ class PagesModel extends Model
     */
     public function user(): array
     {
-        // ADD WHERE ID = with GET 
+        // ADD WHERE ID = PEOPLE.ID  
         // First Table - Get all data from the user 
-        $request = 'SELECT people_fullName, people_email, people_phone, people_company FROM people';
+        $request = 'SELECT people_fullName, people_email, people_phone, company.company_name FROM people INNER JOIN people_has_company ON people.id = people_has_company.fk_people INNER JOIN company ON people_has_company.fk_company = company.id';
         $result = $this->getData($request);
         $result_global['user_info']['row'] = $result;
         $result_global['user_info']['col'] = array("Id", "Name", "Email", "Phone Number", 'Company');
 
 
         // Second table - Get all the invoices related to the user 
-        // ADD WHERE ID = user's id 
-        $request = 'SELECT invoice_number, invoice_date FROM invoice';
+        // ADD WHERE ID = PEOPLE.id 
+        $request = 'SELECT invoice.invoice_number, invoice.invoice_date FROM people
+        INNER JOIN invoice ON people.id = invoice.invoice_fk_people';
         $result = $this->getData($request);
         $result_global['user_invoices']['row'] = $result;
         $result_global['user_invoices']['col'] = array("id", "Invoice Number", "Date");
@@ -103,14 +104,17 @@ class PagesModel extends Model
     public function invoice(): array
     {
         // First table - Company linked to the invoice 
-        $request = 'SELECT people_fullName, people_email, people_phone, people_company FROM people';
+        // ADD : WHERE ID = INVOICE.ID
+        $request = 'SELECT company.company_name, company.company_tva, type.type FROM invoice INNER JOIN company ON invoice_fk_company = company.id INNER JOIN type ON company.company_fk_type = type.id';
         $result = $this->getData($request);
         $result_global['invoice_linkedCompany']['row'] = $result;
         $result_global['invoice_linkedCompany']['col'] = array("Id", "Company Name", "TVA number", "Company Type");
         // Helper::dump($result);
 
+
         //Second table - Contact person
-        $request = 'SELECT people_fullName, people_email, people_phone, people_company FROM people';
+        // ADD : WHERE ID = INVOICE.ID
+        $request = 'SELECT people.people_fullName, people.people_email, people.people_phone, people.people_company FROM invoice INNER JOIN company ON invoice_fk_company = company.id INNER JOIN people_has_company ON company.id = people_has_company.fk_company INNER JOIN people ON people_has_company.fk_people = people.id';
         $result = $this->getData($request);
         $result_global['invoice_contactPerson']['row'] = $result;
         $result_global['invoice_contactPerson']['col'] = array("Id", "Name", "Email", "Phone Number", 'Company');
@@ -119,10 +123,19 @@ class PagesModel extends Model
 
     public function company(): array
     {
-        $request = 'SELECT people_fullName, people_email, people_phone, people_company FROM people';
+        // First table - Show all the people in the company
+        //ADD : WHERE ID = COMPANY.ID
+        $request = 'SELECT people.people_fullName, people.people_email, people.people_phone, people.people_company FROM company INNER JOIN people_has_company ON company.id = people_has_company.fk_company INNER JOIN people ON people.id = people_has_company.fk_people';
         $result = $this->getData($request);
-        $result_global['users']['row'] = $result;
-        $result_global['users']['col'] = array("Id", "Name", "Email", "Phone Number", 'Company');
+        $result_global['company_people']['row'] = $result;
+        $result_global['company_people']['col'] = array("Id", "Name", "Email", "Phone Number", 'Company');
+
+        // Second Table - Show all the invoices related to the company
+        //ADD : WHERE ID = COMPANY.ID
+        $request = 'SELECT invoice.invoice_number, invoice.invoice_date, people.people_fullName FROM company INNER JOIN invoice ON invoice.invoice_fk_company = company.id INNER JOIN people ON invoice.invoice_fk_people = people.id';
+        $result = $this->getData($request);
+        $result_global['company_invoice']['row'] = $result;
+        $result_global['company_invoice']['col'] = array("Id", "Invoice Number", "Date", "Contact Person");
         // Helper::dump($result);
         return $result_global;
     }

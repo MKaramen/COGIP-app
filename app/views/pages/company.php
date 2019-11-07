@@ -15,7 +15,7 @@
                 <h3 class="content__table-title mb-3"><?= $data['firsth3'] ?></h3>
                 <div class="content__table-body">
                     <?= $first_part;
-                    echo "dB missing";
+                    Helper::makeTable("company_people", $dataModel);
                     echo $second_part; ?>
                 </div>
             </section>
@@ -24,7 +24,7 @@
                 <h3 class="content__table-title mb-3"><?= $data['secondh3'] ?></h3>
                 <div class="content__table-body">
                     <?= $first_part;
-                    echo "dB missing";
+                    Helper::makeTable("company_invoice", $dataModel);
                     echo $second_part; ?>
                 </div>
             </section>
