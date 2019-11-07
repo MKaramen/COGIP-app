@@ -3,7 +3,7 @@ A team project with MVC about PHP
 
 ## Table of contents
 * [Team](#Team)
-* [The Project](#The Project)
+* [Project](#Project)
 * [Duration](#Duration)
 * [Mock-up](#Mock-up)
   * [Database](#Database)
@@ -21,7 +21,7 @@ A team project with MVC about PHP
 - [Yong Chin Zhuang] (https://github.com/yongchin95)
 
 
-## The Project
+## Project
 You can acces the project [here] (https://github.com/MKaramen/COGIP-app)
 
 We will evaluate our project based on:
