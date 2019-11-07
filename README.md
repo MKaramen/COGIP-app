@@ -45,7 +45,7 @@ We had 10 days to work on this project from 25/10/2019 to 08/11/2019.
 To be completed...
 
 <p align="center">
-  <img src="./public/assets/img/cogip_schema.jpg" alt="Cogip shcema database" />
+  <img src="./public/assets/img/cogip_schema.jpg" alt="Cogip shcema database" width="75%" />
 </p>
 
 ### App
