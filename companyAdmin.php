@@ -1,6 +1,7 @@
 <?php
 require_once './app/config/.env.php';
 require_once './vendor/autoload.php';
+//require_once './app/views/inc/arrayCountry.php';
 //header
 require getenv('APP_ROOT') . '/app/views/inc/header.php';
 
@@ -23,6 +24,15 @@ function sanitizeNames($field){
         return FALSE;
     }
 }
+function sanitizeTva($field){
+	$field = filter_var(trim($field), FILTER_SANITIZE_STRING);
+    
+    if(filter_var($field, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"#^B{1}E{1}[ ]{1}0{1}[0-9]{9}$#")))){
+        return $field;
+    } else{
+        return FALSE;
+    }
+}
 function sanitizePhone($field){
     $field= filter_var(trim($field), FILTER_SANITIZE_NUMBER_INT);
 
@@ -32,7 +42,10 @@ function sanitizePhone($field){
         return FALSE;
     }
 }
-
+function feedback($arg, $type = "danger"){
+    echo '<div class="alert alert-'.$type.' text-center notification">'.$arg.'</div>';
+}
+//SANITIZE && VALIDATING
 if (isset($_POST["submit"])){
 
     if(empty(trim($_POST['company_name']))){
@@ -40,15 +53,15 @@ if (isset($_POST["submit"])){
     }else{
         $companyName = sanitizeNames($_POST['company_name']);
 		    if ($companyName == FALSE){
-		    	$errcompanyName = " Company name is not valid";
+                $errcompanyName = " Company name is not valid";
 		    }
     }
     if(empty(trim($_POST['company_tva']))){
         $errtva = "- Company TVA is empty -";
     }else{
-        $company_tva = sanitizeNames($_POST['company_tva']);
+        $tva = sanitizeTva($_POST['company_tva']);
 		    if ($tva == FALSE){
-		    	$errtva = " Company TVA is not valid";
+		    	$errtva = " Company TVA is not valid ex: BE 0xxxxxxxxx(10)";
 		    }
     }
     if(empty(trim($_POST['company_phone']))){
@@ -56,11 +69,15 @@ if (isset($_POST["submit"])){
     } else {
         $phone = sanitizePhone($_POST['company_phone']);
         if ($phone == FALSE){
-            $errPhone = "- phone number is not valid -";
+            $errPhone = "- phone number is not valid - ex: 1234567890";
         }
     }
-
-
+    if(empty(trim($_POST['company_type']))){
+        $errcompanyType = "- Company is not selected -";
+    }
+    if(!$errcompanyName && !$errtva && !$errPhone&& !$errcompanyType ){
+		feedback("All your informations has been validated and sent", "success");
+    }
 }
 ?>
 
@@ -98,7 +115,7 @@ if (isset($_POST["submit"])){
                     </div>
                     <div class="form-group">
                         <label for="companyType">Company type</label>
-                            <select class="form-control" id="company_type" name="comapny_type">
+                            <select class="form-control" id="company_type" name="company_type">
                                 <option disabled selected>Select your company type</option>
                                 <option value="supplier">Supplier</option>
                                 <option value="client">Client</option>

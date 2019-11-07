@@ -3,6 +3,68 @@ require_once './app/config/.env.php';
 require_once './vendor/autoload.php';
 //header
 require getenv('APP_ROOT') . '/app/views/inc/header.php';
+
+$number = $date = $company = $people = "";
+$errNumber = $errDate = $errCompany = $errPeople = "";
+
+//VAR
+$number = $_POST["invoice_number"];
+$date = $_POST["invoice_date"];
+$company = $_POST["invoice_fk_company"];
+$people = $_POST["invoice_fk_people"];
+
+//FUNCTION
+function sanitizeInvoiceNumber($field){
+    $field= filter_var(trim($field), FILTER_SANITIZE_STRING);
+
+    if(filter_var($field, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"#^F{1}[0-9]{8}-{1}[0-9]{3}$#")))){
+        return $field;
+    } else{
+        return FALSE;
+    }
+}
+function sanitizeInvoiceDate($field){
+    $field= filter_var(trim($field), FILTER_SANITIZE_STRING);
+
+    if(filter_var($field, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"#^[0-9]{4}[-./]{1}[0-9]{2}[-./]{1}[0-9]{2}$#")))){
+        return $field;
+    } else{
+        return FALSE;
+    }
+}
+function feedback($arg, $type = "danger"){
+    echo '<div class="alert alert-'.$type.' text-center notification">'.$arg.'</div>';
+}
+
+//SANITIZE
+if (isset($_POST["submit"])){
+
+    if(empty($_POST['invoice_number'])){
+        $errNumber = "-  Number is empty -";
+    } else {
+        $number = (preg_match("#^F{1}[0-9]{8}-{1}[0-9]{3}$#", $_POST['invoice_number']));
+        if ($number == FALSE){
+            $errNumber = " - number is not valid - ex: F12345678-000) ";            
+        }
+    }
+    if(empty(trim($_POST['invoice_date']))){
+        $errDate = "-  Date is empty -";
+    } else {
+        $date = sanitizeInvoiceDate($_POST['invoice_date']);
+        if ($date == FALSE){
+            $errDate = "- Date is not valid - ex: yyyy-mm-dd";
+        }
+    }
+    if(empty(trim($_POST['invoice_fk_company']))){
+        $errCompany = "- Company is not selected -";
+    }
+    if(empty(trim($_POST['invoice_fk_people']))){
+        $errPeople = "- Contact is not selected -";
+    }
+    if(!$errNumber && !$errDate && !$errcompany && !$errPeople ){
+		feedback("All your informations has been validated and sent", "success");
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,34 +85,34 @@ require getenv('APP_ROOT') . '/app/views/inc/header.php';
                 <form class="mt-5 text-center" method="post" action="">
                     <div class="form-group">
                         <label for="invoiceNumber">Invoice Number</label>
-                        <input type="text" name="number" maxlenght="13" class="form-control" id="invoiceNumber" aria-describedby="invoiceNumberHelp" placeholder="Enter your invoice number">
-                        <span class='text-danger'></span>
+                        <input type="text" name="invoice_number"  maxlenght="13" class="form-control" id="invoice_number" aria-describedby="invoiceNumberHelp" placeholder="Enter your invoice number">
+                        <span class='text-danger'><?php echo $errNumber ?></span>
                     </div>
                     <div class="form-group">
                         <label for="invoiceDate">Invoice Date</label>
-                        <input type="text" name="number" maxlenght="13" class="form-control" id="invoiceNumber" aria-describedby="invoiceNumberHelp" placeholder="Enter your invoice number">
-                        <span class='text-danger'></span>
+                        <input type="text" name="invoice_date" class="form-control" id="invoice_date" aria-describedby="invoiceDateHelp" placeholder="Enter date">
+                        <span class='text-danger'><?php echo $errDate ?></span>
                     </div>
-                    
                     <div class="form-group">
                         <label for="companyName">Company name</label>
-                        <select class="form-control" id="companyType">
+                        <select class="form-control" id="companyType" name="invoice_fk_company">
                             <option disabled selected>Select your company</option>
                             <option value="companyName">Telenet</option>
                             <option value="companyName">Proximus</option>
                         </select>
-                        <span class='text-danger'></span>
+                        <span class='text-danger'><?php echo $errCompany ?></span>
                     </div>
                     <div class="form-group">
-                        <label for="invoiceContact">Invoice Contact</label>
-                        <select class="form-control" id="invoiceContact">
-                        <option disabled selected>Select your contact</option>
-                            <option value="contactName">Matis bg</option>
-                            <option value="contactName">Julio El Professor</option>
+                        <label for="contactName">Contact name</label>
+                        <select class="form-control" id="invoiceContact" name="invoice_fk_people">
+                            <option disabled selected>Select your contact person</option>
+                            <option value="julio">Julio Master</option>
+                            <option value="matis">Matis el febrilo</option>
+                            <option value="julio">Chino el clowno</option>
                         </select>
-                        <span class='text-danger'></span>
+                        <span class='text-danger'><?php echo $errPeople ?></span>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-3">Add new invoice</button>
+                    <button type="submit" name="submit" class="btn btn-primary mt-3">Add new invoice</button>
                 </form>
             </div>
         </div>

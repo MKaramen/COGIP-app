@@ -45,7 +45,10 @@ function sanitizePhone($field){
         return FALSE;
     }
 }
-
+function feedback($arg, $type = "danger"){
+    echo '<div class="alert alert-'.$type.' text-center notification">'.$arg.'</div>';
+}
+//SANITIZE && VALIDATING
 if (isset($_POST["submit"])){
 
     if(empty(trim($_POST['people_name']))){
@@ -84,12 +87,11 @@ if (isset($_POST["submit"])){
     if(empty(trim($_POST['people_company']))){
         $errcompany = "- Company is not choose -";
     }
+    if(!$errName && !$errFirstname && !$errEmail && !$errPhone && !$errcompany ){
+		feedback("All your informations has been validated and sent", "success");
+    }
 }
 
-
-// $sql ="INSERT INTO people (people_fullName,people_email,people_phone,
-// people_company)
-// VALUES ('$name','$email','$phone')";
 ?>
 
 <!DOCTYPE html>
