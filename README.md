@@ -1,6 +1,18 @@
 # Accounting application of the COGIP
 A team project with MVC about PHP
 
+## Table of contents
+* [Team](#Team)
+* [The Project](#The Project)
+* [Duration](#Duration)
+* [Mock-up](#Mock-up)
+  * [Database](#Database)
+  * [App](#App)
+* [Technology](#Technology)
+  * [Front-End](#Front-End)
+  * [Back-End](#Back-End)
+* [Sources](#Sources)
+
 
 ## Team
 
@@ -24,8 +36,16 @@ We will evaluate our project based on:
 
 You can see the instructions [here] (https://github.com/becodeorg/BXL-Johnson-4.14/tree/master/06-PHP/cogip)
 
-## How long time did you work on this project?
+## Duration
 We had 10 days to work on this project from 25/10/2019 to 08/11/2019.
+
+## Mock-up
+
+### Database
+To be completed...
+
+### App
+To be completed...
 
 ## Technology
 
@@ -35,12 +55,9 @@ We had 10 days to work on this project from 25/10/2019 to 08/11/2019.
 * CSS3
 * JavaScript
 
-### Back-end
+### Back-End
 
 * PHP
-
-## Mock-up
-A completer
 
 ## Source 
 lol
