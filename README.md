@@ -7,8 +7,8 @@ A team project with MVC about PHP
 * [Duration](#Duration)
 * [Mock-up](#Mock-up)
   * [Database](#Database)
-  * [Structure page](#Structure page)
-  * [Detail page](#Detail page)
+  * [Structure](#Structure)
+  * [Detail](#Detail)
   * [Template](#Template)
   * [App](#App)
 * [Technology](#Technology)
@@ -51,14 +51,14 @@ We had 10 days to work on this project from 25/10/2019 to 08/11/2019.
   <img src="./public/assets/img/cogip_schema.jpg" alt="Cogip schema database final" width="30%" />
 </p>
 
-#### Structure page
+#### Structure
 
 <p align="center">
   <img src="./public/assets/img/cogip_invoice.jpg" alt="Cogip schema invoice" width="30%" />
   <img src="./public/assets/img/cogip_page:users.jpg" alt="Cogip schema users" width="30%" />
 </p>
 
-#### Detail page
+#### Detail
 
 <p align="center">
   <img src="./public/assets/img/cogip_detailpage.jpg" alt="Cogip schema detail page" width="30%" />
