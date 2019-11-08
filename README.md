@@ -1,5 +1,5 @@
 # Accounting application of the COGIP
-A team project with MVC about PHP
+A team project with MVC about PHP at Becode
 
 ## Table of contents
 * [Team](#Team)
@@ -77,10 +77,15 @@ We had 10 days to work on this project from 25/10/2019 to 08/11/2019.
 * HTML5
 * CSS3
 * JavaScript
+* JQuery
+* Bootstrap
 
 ### Back-End
 
 * PHP
+* MySQL
+
+
 
 ## Source 
 - PHP manual (https://www.php.net/manual/en/index.php)
