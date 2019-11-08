@@ -39,6 +39,8 @@ class AdminModel extends Database
 
         $request = "INSERT INTO $table_name(" . $columns . ") VALUES(" . $values . ");";
         self::insertData($request);
+
+
         // echo $request;
     }
 
@@ -52,5 +54,35 @@ class AdminModel extends Database
     {
         $request = "UPDATE FROM $table_name WHERE id=$id";
         self::update_content($request);
+    }
+
+    /*
+        Preload information for the invoice form such as the company and all the people working for it 
+    */
+    public  function preloadInvoice(): array
+    {
+        $request_company = "SELECT * FROM company";
+        $result_company = $this->getData($request_company);
+        $result['company'] = $result_company;
+
+
+        $request_people = "SELECT * FROM people";
+        $result_people = $this->getData($request_people);
+        $result['people']  = $result_people;
+
+
+        $request_linkBetween_peopleCompany = "SELECT * FROM people_has_company";
+        $result_link = $this->getData($request_linkBetween_peopleCompany);
+        $result['link'] = $result_link;
+
+        return $result;
+    }
+
+    public function request_people($request): array
+    {
+        $request_people = $request;
+        $result_people = $this->getData($request_people);
+        $result['people']  = $result_people;
+        return $result;
     }
 }
