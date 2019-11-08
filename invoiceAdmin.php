@@ -90,7 +90,7 @@ if (isset($_POST["submit"])){
                     </div>
                     <div class="form-group">
                         <label for="invoiceDate">Invoice Date</label>
-                        <input type="text" name="invoice_date" class="form-control" id="invoice_date" aria-describedby="invoiceDateHelp" placeholder="Enter date">
+                        <input type="text" name="invoice_date" class="form-control" id="invoice_date" aria-describedby="invoiceDateHelp" placeholder="Enter date (yyyy-mm-dd)">
                         <span class='text-danger'><?php echo $errDate ?></span>
                     </div>
                     <div class="form-group">

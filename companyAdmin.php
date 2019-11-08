@@ -1,18 +1,20 @@
 <?php
 require_once './app/config/.env.php';
 require_once './vendor/autoload.php';
-//require_once './app/views/inc/arrayCountry.php';
+require getenv('APP_ROOT') . '/app/views/inc/arrayCountry.php';
 //header
 require getenv('APP_ROOT') . '/app/views/inc/header.php';
 
-$companyName = $tva = $phone = $companyType = "";
-$errcompanyName = $errtva = $errPhone = $errcompanyType = "";
+$companyName = $tva = $phone = $countries = $companyType = "";
+$errcompanyName = $errtva = $errPhone = $errCountry = $errcompanyType = "";
 
 //VAR
 $companyName = $_POST["company_name"];
 $tva = $_POST["company_tva"];
 $phone = $_POST["company_phone"];
+$countries = $_POST['company_country'];
 $companyType = $_POST["company_type"];
+
 
 //FUNCTION
 function sanitizeNames($field){
@@ -72,10 +74,15 @@ if (isset($_POST["submit"])){
             $errPhone = "- phone number is not valid - ex: 1234567890";
         }
     }
+    if(empty(trim($_POST['company_country']))){
+        $errCountry = "- Country is not selected -";
+    }
+
     if(empty(trim($_POST['company_type']))){
         $errcompanyType = "- Company is not selected -";
     }
-    if(!$errcompanyName && !$errtva && !$errPhone&& !$errcompanyType ){
+    
+    if(!$errcompanyName && !$errtva && !$errPhone&& !$errcompanyType &&!$errCountry ){
 		feedback("All your informations has been validated and sent", "success");
     }
 }
@@ -112,6 +119,24 @@ if (isset($_POST["submit"])){
                         <label for="phone">Phone</label>
                         <input type="text" name="company_phone" minlength="10" maxlength="10" class="form-control" id="phone" aria-describedby="phone" placeholder="Enter your phone number">
                         <span class='text-danger'><?php echo $errPhone?></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="company_country">Your country</label>
+                            <select class="form-control" id="company_country" name="company_country">
+                                <option disabled selected>Select your country</option>
+                        <?php 
+                        foreach ($continents as $continent => $countries) { ?>
+                            <optgroup label="<?= $continent ?>">
+                            <?php 
+                            foreach ($countries as $country) { ?>
+                                <option value="<?= strtolower($country) ?>">
+                                    <?= $country ?>
+                                </option>
+                            <?php } ?>
+                            </optgroup>
+                        <?php } ?>
+                    </select>
+                    <span class='text-danger'><?php echo $errCountry?></span>
                     </div>
                     <div class="form-group">
                         <label for="companyType">Company type</label>
