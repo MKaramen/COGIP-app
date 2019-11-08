@@ -44,7 +44,7 @@ We had 10 days to work on this project from 25/10/2019 to 08/11/2019.
 ### Database
 To be completed...
 <p align="center">
-  <img src="./public/assets/img/cogip_database.jpg" alt="Cogip schema database" width="60%" />
+  <img src="./public/assets/img/cogip_database mock up.jpg" alt="Cogip schema database first step" width="60%" />
 </p>
 <p align="center">
   <img src="./public/assets/img/cogip_schema.jpg" alt="Cogip schema database final" width="60%" />
