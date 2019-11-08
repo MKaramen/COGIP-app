@@ -8,10 +8,10 @@ $number = $date = $company = $people = "";
 $errNumber = $errDate = $errCompany = $errPeople = "";
 
 //VAR
-$number = $_POST["invoice_number"];
-$date = $_POST["invoice_date"];
-$company = $_POST["invoice_fk_company"];
-$people = $_POST["invoice_fk_people"];
+$number = strtolower($_POST["invoice_number"]);
+$date = strtolower($_POST["invoice_date"]);
+$company = strtolower($_POST["invoice_fk_company"]);
+$people = strtolower($_POST["invoice_fk_people"]);
 
 //FUNCTION
 function sanitizeInvoiceNumber($field){
@@ -39,26 +39,26 @@ function feedback($arg, $type = "danger"){
 //SANITIZE
 if (isset($_POST["submit"])){
 
-    if(empty($_POST['invoice_number'])){
+    if(empty(strtolower($_POST['invoice_number']))){
         $errNumber = "-  Number is empty -";
     } else {
-        $number = (preg_match("#^F{1}[0-9]{8}-{1}[0-9]{3}$#", $_POST['invoice_number']));
+        $number = (preg_match("#^F{1}[0-9]{8}-{1}[0-9]{3}$#", strtolower($_POST['invoice_number'])));
         if ($number == FALSE){
             $errNumber = " - number is not valid - ex: F12345678-000) ";            
         }
     }
-    if(empty(trim($_POST['invoice_date']))){
+    if(empty(trim(strtolower($_POST['invoice_date'])))){
         $errDate = "-  Date is empty -";
     } else {
-        $date = sanitizeInvoiceDate($_POST['invoice_date']);
+        $date = sanitizeInvoiceDate(strtolower($_POST['invoice_date']));
         if ($date == FALSE){
             $errDate = "- Date is not valid - ex: yyyy-mm-dd";
         }
     }
-    if(empty(trim($_POST['invoice_fk_company']))){
+    if(empty(trim(strtolower($_POST['invoice_fk_company'])))){
         $errCompany = "- Company is not selected -";
     }
-    if(empty(trim($_POST['invoice_fk_people']))){
+    if(empty(trim(strtolower($_POST['invoice_fk_people'])))){
         $errPeople = "- Contact is not selected -";
     }
     if(!$errNumber && !$errDate && !$errcompany && !$errPeople ){

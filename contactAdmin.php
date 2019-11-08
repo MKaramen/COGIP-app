@@ -7,15 +7,15 @@ require getenv('APP_ROOT') . '/app/views/inc/header.php';
 $fullName = $name = $firstName = $email = $phone = $companyType= $acces ="";
 $errName= $errFirstname = $errEmail = $errPhone = $errFirstname = $errcompany = $erracces = "";
 
-$name = $_POST['people_name'];
-$firstName = $_POST['people_firstName'];
-$email = $_POST['people_email'];
-$phone = $_POST['people_phone'];
-$company = $_POST['people_company'];
+$name = strtolower($_POST['people_name']);
+$firstName = strtolower($_POST['people_firstName']);
+$email = strtolower($_POST['people_email']);
+$phone = strtolower($_POST['people_phone']);
+$company = strtolower($_POST['people_company']);
 $fullName= $firstName . " " . $name;
-$_POST["people_password"] = $name;
-$_POST["people_fullName"] = $fullName;
-$acces = $_POST['people_acces'];
+strtolower($_POST["people_password"] = $name);
+strtolower($_POST["people_fullName"] = $fullName);
+$acces = strtolower($_POST['people_acces']);
 
 //FUNCTION
 function sanitizeNames($field){
@@ -51,40 +51,40 @@ function feedback($arg, $type = "danger"){
 //SANITIZE && VALIDATING
 if (isset($_POST["submit"])){
 
-    if(empty(trim($_POST['people_name']))){
+    if(empty(trim(strtolower($_POST['people_name'])))){
      $errName = "- name is empty -";
     } else {
-		    $name = sanitizeNames($_POST['people_name']);
+		    $name = sanitizeNames(strtolower($_POST['people_name']));
 		    if ($name == FALSE){
 		    	$errName = " Name is not valid";
 		    }
 	}
-    if(empty(trim($_POST['people_firstName']))){
+    if(empty(trim(strtolower($_POST['people_firstName'])))){
         $errFirstname = "- Firstname is empty -";
        } else {
-		    $firstName = sanitizeNames($_POST['people_firstName']);
+		    $firstName = sanitizeNames(strtolower($_POST['people_firstName']));
 		    if ($firstName == FALSE){
 		    	$errFirstname = " Firstname is not valid";
 		    }
 	}
-    if(empty(trim($_POST['people_email']))){
+    if(empty(trim(strtolower($_POST['people_email'])))){
         $errEmail = "- Email is empty -";
     } else {
-		$email = sanitizeEmail($_POST['people_email']);
+		$email = sanitizeEmail(strtolower($_POST['people_email']));
 		if ($email == FALSE){
 			$errEmail = " Email adress is not valid";
 		}
 	}
-    if(empty(trim($_POST['people_phone']))){
+    if(empty(trim(strtolower($_POST['people_phone'])))){
         $errPhone = "- phone number is empty -";
     } else {
-        $phone = sanitizePhone($_POST['people_phone']);
+        $phone = sanitizePhone(strtolower($_POST['people_phone']));
         if ($phone == FALSE){
             $errPhone = "- phone number is not valid -";
         }
     }
 
-    if(empty(trim($_POST['people_company']))){
+    if(empty(trim(strtolower($_POST['people_company'])))){
         $errcompany = "- Company is not choose -";
     }
     if(!$errName && !$errFirstname && !$errEmail && !$errPhone && !$errcompany ){

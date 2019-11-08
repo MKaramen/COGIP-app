@@ -9,11 +9,11 @@ $companyName = $tva = $phone = $countries = $companyType = "";
 $errcompanyName = $errtva = $errPhone = $errCountry = $errcompanyType = "";
 
 //VAR
-$companyName = $_POST["company_name"];
-$tva = $_POST["company_tva"];
-$phone = $_POST["company_phone"];
-$countries = $_POST['company_country'];
-$companyType = $_POST["company_type"];
+$companyName = strtolower($_POST["company_name"]);
+$tva = strtolower($_POST["company_tva"]);
+$phone = strtolower($_POST["company_phone"]);
+$countries = strtolower($_POST['company_country']);
+$companyType = strtolower($_POST["company_type"]);
 
 
 //FUNCTION
@@ -50,35 +50,35 @@ function feedback($arg, $type = "danger"){
 //SANITIZE && VALIDATING
 if (isset($_POST["submit"])){
 
-    if(empty(trim($_POST['company_name']))){
+    if(empty(trim(strtolower($_POST['company_name'])))){
         $errcompanyName = "- Company name is empty -";
     }else{
-        $companyName = sanitizeNames($_POST['company_name']);
+        $companyName = sanitizeNames(strtolower($_POST['company_name']));
 		    if ($companyName == FALSE){
                 $errcompanyName = " Company name is not valid";
 		    }
     }
-    if(empty(trim($_POST['company_tva']))){
+    if(empty(trim(strtolower($_POST['company_tva'])))){
         $errtva = "- Company TVA is empty -";
     }else{
-        $tva = sanitizeTva($_POST['company_tva']);
+        $tva = sanitizeTva(strtolower($_POST['company_tva']));
 		    if ($tva == FALSE){
 		    	$errtva = " Company TVA is not valid ex: BE 0xxxxxxxxx(10)";
 		    }
     }
-    if(empty(trim($_POST['company_phone']))){
+    if(empty(trim(strtolower($_POST['company_phone'])))){
         $errPhone = "- phone number is empty -";
     } else {
-        $phone = sanitizePhone($_POST['company_phone']);
+        $phone = sanitizePhone(strtolower($_POST['company_phone']));
         if ($phone == FALSE){
             $errPhone = "- phone number is not valid - ex: 1234567890";
         }
     }
-    if(empty(trim($_POST['company_country']))){
+    if(empty(trim(strtolower($_POST['company_country'])))){
         $errCountry = "- Country is not selected -";
     }
 
-    if(empty(trim($_POST['company_type']))){
+    if(empty(trim(strtolower($_POST['company_type'])))){
         $errcompanyType = "- Company is not selected -";
     }
     
