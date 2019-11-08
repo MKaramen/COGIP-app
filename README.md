@@ -16,13 +16,13 @@ A team project with MVC about PHP
 
 ## Team
 
-- [Julio ZINGA] (https://github.com/julio-34727)
-- [Matis Karamenderes] (https://github.com/MKaramen)
-- [Yong Chin Zhuang] (https://github.com/yongchin95)
+- [Julio ZINGA](https://github.com/julio-34727)
+- [Matis Karamenderes](https://github.com/MKaramen)
+- [Yong Chin Zhuang](https://github.com/yongchin95)
 
 
 ## Project
-You can acces the project [here] (https://github.com/MKaramen/COGIP-app)
+You can acces the project [here](https://github.com/MKaramen/COGIP-app)
 
 We will evaluate our project based on:
 
@@ -34,7 +34,7 @@ We will evaluate our project based on:
 * allow access to certain page in regards to permissions
 * And more ...
 
-You can see the instructions [here] (https://github.com/becodeorg/BXL-Johnson-4.14/tree/master/06-PHP/cogip)
+You can see the instructions [here](https://github.com/becodeorg/BXL-Johnson-4.14/tree/master/06-PHP/cogip)
 
 ## Duration
 We had 10 days to work on this project from 25/10/2019 to 08/11/2019.
@@ -43,9 +43,11 @@ We had 10 days to work on this project from 25/10/2019 to 08/11/2019.
 
 ### Database
 To be completed...
-
 <p align="center">
-  <img src="./public/assets/img/cogip_schema.jpg" alt="Cogip shcema database" width="60%" />
+  <img src="./public/assets/img/cogip_database.jpg" alt="Cogip schema database" width="60%" />
+</p>
+<p align="center">
+  <img src="./public/assets/img/cogip_schema.jpg" alt="Cogip schema database final" width="60%" />
 </p>
 
 ### App
@@ -64,5 +66,7 @@ To be completed...
 * PHP
 
 ## Source 
-To be completed...
+- To be completed...
+- Developper Mozilla (https://developer.mozilla.org/en-US/)
+- w3school (https://www.w3schools.com/)
 
