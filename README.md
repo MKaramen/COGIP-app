@@ -7,6 +7,9 @@ A team project with MVC about PHP
 * [Duration](#Duration)
 * [Mock-up](#Mock-up)
   * [Database](#Database)
+  * [Structure page](#Structure page)
+  * [Detail page](#Detail page)
+  * [Template](#Template)
   * [App](#App)
 * [Technology](#Technology)
   * [Front-End](#Front-End)
@@ -41,15 +44,30 @@ We had 10 days to work on this project from 25/10/2019 to 08/11/2019.
 
 ## Mock-up
 
-### Database
-To be completed...
+#### Database
+
 <p align="center">
   <img src="./public/assets/img/cogip_database mock up.jpg" alt="Cogip schema database first step" width="30%" />
   <img src="./public/assets/img/cogip_schema.jpg" alt="Cogip schema database final" width="30%" />
 </p>
+#### Structure page
 
-### App
-To be completed...
+<p align="center">
+  <img src="./public/assets/img/cogip_invoice.jpg" alt="Cogip schema invoice" width="30%" />
+  <img src="./public/assets/img/cogip_page:users.jpg" alt="Cogip schema users" width="30%" />
+</p>
+
+#### Detail page
+
+<p align="center">
+  <img src="./public/assets/img/cogip_detailpage.jpg" alt="Cogip schema detail page" width="30%" />
+</p>
+
+#### Template
+
+<p align="center">
+  <img src="./public/assets/img/cogip_template.jpg" alt="Cogip schema template" width="30%" />
+</p>
 
 ## Technology
 
@@ -64,7 +82,7 @@ To be completed...
 * PHP
 
 ## Source 
-- To be completed...
+- PHP manual (https://www.php.net/manual/en/index.php)
 - Developper Mozilla (https://developer.mozilla.org/en-US/)
 - w3school (https://www.w3schools.com/)
 
