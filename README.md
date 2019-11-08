@@ -64,7 +64,7 @@ To be completed...
 * PHP
 
 ## Source 
-To be completed...
-Developper Mozilla (https://developer.mozilla.org/en-US/)
-w3school (https://www.w3schools.com/)
+- To be completed...
+- Developper Mozilla (https://developer.mozilla.org/en-US/)
+- w3school (https://www.w3schools.com/)
 
