@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 /*
  * Database Class
@@ -12,7 +10,6 @@ declare(strict_types=1);
 
 class Database 
 {
-
     private $db_driver;
     private $db_host;
     private $db_username;
@@ -20,6 +17,7 @@ class Database
     private $db_name;
     private $db_options;
     protected $db;
+    protected $errors = [];
 
     public function __construct() 
     {
@@ -42,62 +40,14 @@ class Database
             $this->close();
             $this->db = new PDO($this->db_dsn, $this->db_username, $this->db_password, $this->db_options);
         } 
-        catch (PDOException $e) 
-        {
-            echo 'There is some problem in connection: ' . $e->getMessage();
-        }
+        catch (PDOException $e) {$this->errors['sql'][] = $e->getMessage();}
     }
 
     public function close(): void
     {
         $this->db = null;
+        $this->errors = [];
     }
     
-    public function select(string $sql): array
-    {
-        $out = [];
-        $this->open();
-        $response = $this->db->query($sql);
-
-        $nbr = 1;
-        while ($row = $response->fetch()) 
-        {
-            $out[] = array_merge(array('nbr' => $nbr), $row);
-            $nbr++;
-        }
-        $this->close();
-
-        return $out;
-    }
-
-    public function insert($query, $bindings=[])
-    {
-
-    }
-
-    public function update($query, $bindings=[]) 
-    {
-
-    }
-
-    /**
-     * Run a delete statement against the database.
-     *
-     * @param  string  $query
-     * @param  array   $bindings
-     * @return int
-     */
-    public function delete($query, $bindings=[]) 
-    {
-
-    }
-
-    /**
-     * Execute an SQL statement and return the boolean result.
-     *
-     * @param  string  $query
-     * @param  array   $bindings
-     * @return bool
-     */
 
 }
