@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 
 /*
@@ -15,40 +13,71 @@ class AdminController extends Controller
         $this->currentModel = $this->model('AdminModel'); 
     }  
 
-    public function login(): void
+    public function login(array $args): void
     {
+        $expired = $args ? $args[0] : '';   
         $dataInfo = array(
             'title'               => 'Login',
             'content_title'       => 'Welcome to the COGIP', 
             'content_description' => 'Please log in to start your session.',
         );
 
-        $dataModel = [];
-        //$dataModel = $this->currentModel->login();
+        // Login form proessing
+        if($_SERVER['REQUEST_METHOD'] == 'POST') 
+        {   // POST request (login form)
 
-        $this->view('admin/login', $dataInfo, $dataModel);
+            // Sanitize $_POST data
+            $dataModel = array(
+                'login_username' => 
+                    filter_var(trim($_POST['login_username']), FILTER_SANITIZE_STRING),
+                'login_password' => 
+                    filter_var(trim($_POST['login_password']), FILTER_SANITIZE_STRING),
+                'login_error'    => '',
+            );
+
+            // Authenticating a user (username and password)
+            $username = $dataModel['login_username'];
+            $password = $dataModel['login_password'];
+            $loggedInUser = $this->currentModel->login($username, $password);
+            
+            if (empty($loggedInUser))
+            {
+                // Load View with errors
+                $dataModel['login_error'] = 'These credentials do not match our records';
+                $this->view('admin/login', $dataInfo, $dataModel);
+            }
+            elseif ($loggedInUser['people_access'] == 'user') 
+            {
+                // Load View with errors
+                $dataModel['login_error'] = 'Forbidden access for this type of user';
+                $this->view('admin/login', $dataInfo, $dataModel);
+            }
+            else Session::createUser($loggedInUser); // Create session variable
+        }
+        else 
+        {  // No POST request (default values)
+            $dataModel = array(
+                'login_username' => '',
+                'login_password' => '',
+                'login_error'    => ($expired=='yes') ? 'Your session has expired. Please log in again' : '',
+            );
+
+            // Load view with default values
+            $this->view('/admin/login', $dataInfo, $dataModel);
+        }
     }
 
-    public function reset(): void
-    {
-        $dataInfo = array(
-            'title'               => 'Reset',
-            'content_title'       => 'Reset password', 
-            'content_description' => 'Please type your email and clik to change or reset your password.',
-        );
+    /* */
+    public function logout(): void {Session::logout();}
 
-        $dataModel = [];
-        //$dataModel = $this->currentModel->reset();
-
-        $this->view('admin/reset', $dataInfo, $dataModel);
-    }
-
+    /* */
     public function dashboard(): void
     {
+        $username = Helper::capitalize($_SESSION['firstname']);
         $dataInfo = array(
             'title'               => 'Dashboard',
             'content_title'       => 'Dashboard', 
-            'content_description' => "Bonjour Jean-Christian ! Que souhaiteriez-vous faire aujourd'hui ?",
+            'content_description' => 'Hi '. $username . '! What would you like to do today?',
         );
 
         $dataModel = [];
@@ -62,13 +91,13 @@ class AdminController extends Controller
         $dataInfo = array(
             'title'               => 'New user',
             'content_title'       => 'Create new user', 
-            'content_description' => '',
+            'content_description' => 'Please fill in your credentials to create a free account',
         );
 
         $dataModel = [];
         //$dataModel = $this->currentModel->new_user();
 
-        $this->view('admin/dashboard', $dataInfo, $dataModel);
+        $this->view('admin/new_user', $dataInfo, $dataModel);
     }
 
     public function new_invoice(): void
@@ -82,7 +111,7 @@ class AdminController extends Controller
         $dataModel = [];
         //$dataModel = $this->currentModel->new_invoice();
 
-        $this->view('admin/dashboard', $dataInfo, $dataModel);
+        $this->view('admin/new_invoice', $dataInfo, $dataModel);
     }
 
     public function new_company(): void
@@ -96,6 +125,20 @@ class AdminController extends Controller
         $dataModel = [];
         //$dataModel = $this->currentModel->new_company();
 
-        $this->view('admin/dashboard', $dataInfo, $dataModel);
+        $this->view('admin/new_company', $dataInfo, $dataModel);
+    }
+
+    public function reset_password(): void
+    {
+        $dataInfo = array(
+            'title'               => 'Reset',
+            'content_title'       => 'Reset password', 
+            'content_description' => 'Please type your email and clik to change or reset your password.',
+        );
+
+        $dataModel = [];
+        //$dataModel = $this->currentModel->reset_password();
+
+        $this->view('admin/reset_password', $dataInfo, $dataModel);
     }
 }
