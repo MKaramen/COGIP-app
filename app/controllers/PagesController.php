@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 
 /*
@@ -33,7 +31,7 @@ class PagesController extends Controller
         $dataInfo = array(
             'title'               => 'Users',
             'content_title'       => 'COGIP: Users directory', 
-            'content_description' => 'Bonjour !',
+            'content_description' => '',
         );
 
         $dataModel = $this->currentModel->users();
@@ -46,7 +44,7 @@ class PagesController extends Controller
         $dataInfo = array(
             'title'               => 'Invoices',
             'content_title'       => 'COGIP: List of invoices', 
-            'content_description' => 'Bonjour !',
+            'content_description' => '',
         );
 
         $dataModel = $this->currentModel->invoices();
@@ -59,7 +57,7 @@ class PagesController extends Controller
         $dataInfo = array(
             'title'               => 'Companies',
             'content_title'       => 'COGIP: Companies directory', 
-            'content_description' => 'Bonjour !',
+            'content_description' => '',
         );
 
         $dataModel = $this->currentModel->companies();
