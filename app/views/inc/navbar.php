@@ -1,11 +1,11 @@
-<!-- nav -->
-<nav class="navbar navbar-expand-md py-sm-0" id="nav">
+<!-- NAV -->
+<nav class="navbar navbar-expand-md py-sm-0" id="nav-top">
 
-    <!-- logo -->
+    <!-- LOGO -->
     <a class="navbar-brand d-flex logo__block" href="<?=getenv('APP_URL')?>">
-        <div class="logo__im d-none d-sm-block mr-2">
-            <img src="<?=getenv('APP_URL')?>/public/assets/img/cogip-logo.png" alt="Cogip logo">
-        </div>
+        <!-- <div class="logo__im d-none d-sm-block mr-2">
+            <img src="<?=getenv('APP_URL')?>/public/assets/img/cogip_logo.svg" alt="Cogip logo">
+        </div> -->
         <div class="logo__body">
             <h1 class="logo__title"><?=getenv('APP_NAME')?></h1>
             <div class="logo__ratings">
@@ -13,9 +13,9 @@
             </div>
         </div>
     </a>
-    <!-- logo-end -->
+    <!-- END OF LOGO -->
 
-    <!-- hamburger icon -->
+    <!-- HAMBURGER ICON -->
     <button class="navbar-toggler nav__hamburger pb-3" type="button" 
             data-toggle="collapse" data-target="#hidden-nav" 
             aria-controls="hidden-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,9 +23,9 @@
         <span class="line line2"></span>
         <span class="line line3"></span>
     </button>
-    <!-- hamburger icon-end --> 
+    <!-- END OF HAMBURGER MENU --> 
 
-    <!-- top menu items -->
+    <!-- TOP NAV -->
     <div class="collapse navbar-collapse d-felx justify-content-end align-self-start" id="hidden-nav">
         <ul class="navbar-nav border-top py-3 py-md-0 nav__top">
             <li class="nav-item text-md-center">
@@ -48,14 +48,31 @@
                     href="<?=getenv('APP_URL')?>/pages/companies">
                     <i class="far fa-registered"></i> Companies</a>
             </li>
+
+            <?php if(Session::isLoggedIn()) :?>
+
             <li class="nav-item text-md-center">
+                <a  class="nav-link <?php if ($dataInfo['title'] == 'Dashboard') echo 'nav-link--active'?>"
+                    href="<?=getenv('APP_URL')?>/admin/dashboard">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            </li>
+            <li class="nav-item text-md-center">
+                <a class="nav-link" href="<?=getenv('APP_URL')?>/admin/logout">
+                    <i class="fas fa-power-off"></i> Logout</a>
+            </li>
+
+            <?php else :?>
+
+            <li>
                 <a class="nav-link <?php if ($dataInfo['title'] == 'Login') echo 'nav-link--active'?>" 
                     href="<?=getenv('APP_URL')?>/admin/login">
                     <i class="fas fa-user-lock"></i> Login</a>
             </li> 
+            
+            <?php endif;?>
         </ul>
     </div> 
-    <!-- top menu items-end --> 
+    <!-- END OF TOP NAV --> 
 
 </nav>
-<!-- nav-end -->
+<!-- END OF NAV -->
