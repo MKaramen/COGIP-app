@@ -1,1 +1,4 @@
 .DS_Store
+.htaccess
+.cogip.sql
+app/config/.env.php
