@@ -1,6 +1,4 @@
-<?php 
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 
 /* App root (relative path) and URL root (absolute path) */
@@ -12,25 +10,25 @@ function getAppURL(): string
     if(isset($_SERVER['HTTPS'])) $protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != 'off') ? 'https' : 'http';
     else $protocol = 'http';
 
-    return $protocol . '://localhost/projects/cogip.dev';
+    return $protocol . '://127.0.0.1/projects/cogip.com';
 }
 
 /* Declare const of arrays (APP_PARAMS) */
 define('APP_PARAMS', array(
 
     # App parameters
-    'APP_URL'     => getAppURL(),     # URL root 
-    'APP_ROOT'    => APP_ROOT,        # app root (dir of index file)
-    'APP_ENV'     => 'local',         # app (site) status : dev (local) or prod (final)
-    'APP_NAME'    => 'Cogip',         # app (site) name
-    'APP_VERSION' => '1.0',           # app version
+    'APP_URL'     => getAppURL(),              # URL root 
+    'APP_ROOT'    => APP_ROOT,                 # app root (dir of index file)
+    'APP_ENV'     => 'local',                  # app (site) status : dev (local) or prod (final)
+    'APP_NAME'    => 'Cogip',                  # app (site) name
+    'APP_VERSION' => '1.0',                    # app version
 
     # Database parameters
-    'DB_DRIVER'   => 'mysql',         # Data source name (DSN)
-    'DB_HOST'     => 'localhost',     # Database host
-    'DB_NAME'     => 'cogip_test',    # Database name
-    'DB_USERNAME' => 'root',          # Database user
-    'DB_PASSWORD' => '',              # Database password
+    'DB_DRIVER'   => 'mysql',                  # Data source name (DSN)
+    'DB_HOST'     => 'localhost',              # Database host
+    'DB_NAME'     => 'cogip_test',             # Database name
+    'DB_USERNAME' => 'root',                   # Database user
+    'DB_PASSWORD' => '',                       # Database password
 
     # PHP config
 ));
