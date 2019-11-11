@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 
 /*
@@ -13,6 +11,7 @@ class Route
     private $currentController;
     private $currentMethod;
     private $params;
+    private $errors = [];
 
     public function routeRequest(): void
     {
@@ -35,21 +34,25 @@ class Route
             $this->currentController = $currentController;
             $controllerFile = getenv('APP_ROOT') . '/app/controllers/' . $this->currentController . '.php';
 
-            if (!file_exists($controllerFile)) throw new Exception('Page not found!');
+            if (!file_exists($controllerFile)) {
+                $this->errors[] = 'Controller Page is not found!';
+                throw new Exception;
+            };
 
-            $this->currentController = new $currentController();                  // instantiate controller
+            $this->currentController = new $currentController();                 // instantiate controller
             
             $this->currentMethod = $currentMethod;
-            if(isset($url[1])) unset($url[1]);                                   // unset method
-            $this->params = $url ? array_values($url) : [];                      // get Params
+            $this->params = $url ? array_values(array_slice($url,2)) : array();  // get Params
 
             // Call currentMethod on instance currentController with array of params
             $this->currentController->{$this->currentMethod}($this->params);
         } 
-        catch (Exception $e) 
+        catch (Throwable $e) 
         {
-            echo $e->getMessage() . '<br>';
-            Helper::to(getenv('APP_ROOT') . '/app/views/errors/404.php');
+            $this->errors[] = $e->getMessage();
+            $errors = $this->errors;
+            Helper::dump($errors);
+            //Helper::to('/app/views/errors/404');
         }
     }
 }
