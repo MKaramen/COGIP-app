@@ -1,52 +1,61 @@
-/* === Fonts === */
+/* === FONTS === */
 
-/* === Variables ===  */
+/* === VARIABLES ===  */
 :root {
+    /* Sizes */
+
     /* Colors */
-    --cogip-body-text: #303030;
+    --cogip-header: #e9ecef;
+    --cogip-main: white; /*antiquewhite;*/
+    --cogip-footer: #e9ecef;
 
-    --cogip-logo-title: #ff6b34;
-    --cogip-ratings-star: yellow;
-    --cogip-ratings-text: aquamarine;
+    --cogip-logo-title: #61122f;
+    --cogip-ratings-star: #303030;
+    --cogip-ratings-text: #303030;
+    --cogip-hamburger-bars: #61122f;
 
-    --cogip-nav: #303030;
-    --cogip-link: #f5f5f5;
-    --cogip-link-active: #ff6b34;
-    --cogip-hamburger-bars:#ff6b34;
-
-    --cogip-content: #e9ecef;
-    --cogip-dashboard: #23629f;
-    --cogip-table-head: #303030;
-
-    /* Distances */
-    --cogip-header-height: 100px;
-    --cogip-footer-height: 50px;
-    --cogip-dahsboard-width: 200px;
+    --cogip-link: #221a15;
+    --cogip-link-active: #b43000;
+    --cogip-dashboard: #d4ddf9;
+    --cogip-dashboard-link: #221a15;
 }
 
 /* === USER PAGES === */
 
-/* === Rules for main blocks === */
+/* MAIN BLOCKS */
+body, html {height: 100%;}
 body {
     height: 100vh;
     display: grid;
     grid-template-columns: minmax(375px, 1fr);
-    grid-template-rows: var(--cogip-header-height) 1fr var(--cogip-footer-height);
-    color: var(--cogip-body-text);
+    grid-template-rows: auto 1fr auto;
 }
-#header, #footer {
-    background-color: var(--cogip-nav);
-    color: var(--cogip-link);
-    z-index: 999;
-}
-#nav {background-color: var(--cogip-nav);}
-#main {background-color: var(--cogip-content);}
 
-/* === Rules for logo === */
-/* .logo__block {} */
+#header {background-color: var(--cogip-header);}
+#footer {background-color: var(--cogip-footer)}
+#main {
+    background-color: var(--cogip-main);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr;
+
+}
+.dashboard {
+    background-color: var(--cogip-dashboard);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    
+}
+.content {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+/* LOGO */
 .logo__title {
     font-size: 2rem;
     font-weight: bolder;
+    font-family: 'Monoton';
     color: var(--cogip-logo-title);
 }
 .logo__ratings {
@@ -58,13 +67,12 @@ body {
 }
 .logo__ratings .fa-star {color: var(--cogip-ratings-star);}
 
-/* === Rules for hamburger icon === */
+/* HAMBURGER ICON */
 button * {pointer-events: none;}
-nav-button:active {
+.nav__hamburger:active {
     border: none;
     outline: none;
 }
-.nav__hamburger {background-color: transparent;}
 .line {
     display: block;
     width: 23px;
@@ -77,14 +85,13 @@ nav-button:active {
 .change .line2 {opacity: 0;}
 .change .line3 {transform: rotate(45deg) translate(-5px, -6px);}
 
-/* === Rules for nav-links === */
+/* NAV LINKS (main content) */
 .nav-link {
-    background-color: var(--cogip-nav);
     font-size: 0.95rem;
+    font-weight: 500;
     letter-spacing: 1px;
     transition: color 0.5s;
 }
-.nav-link:not(.nav-link--active) {color: var(--cogip-link);}
 .nav-link--active, .nav-link:hover {color: var(--cogip-link-active);}
 .nav-link::after {
     display: block;
@@ -96,9 +103,9 @@ nav-button:active {
 }
 .nav-link:hover::after {transform: scaleX(1);}
 .nav-link::after {transform-origin: 0% 50%;}
+#nav-top .nav-link:not(.nav-link--active) {color: var(--cogip-link);} 
 
-/* === Rules for main content === */
-.content {min-height: 100%;}
+/* MAIN CONTENT */
 .content__title {
     font-size: 1.75rem;
     font-weight: bolder;
@@ -106,50 +113,29 @@ nav-button:active {
     padding-bottom: 1rem;
     border-bottom: 1px solid currentColor;
 }
-/* .content__body {} */
-/* .content__description {} */
 
-/* == Rules for section table === */
-/* .content__table {} */
-.content__table-title {
-    font-size: 1.35rem;
-    font-weight: bolder;
-}
-/* .content__table-body {} */
-.content__table-body table {
-    font-size: small;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-}
-.content__table-body thead {
-    background-color: var(--cogip-table-head);
-    color: var(--cogip-link);
-}
-.content__table-body thead th {border: none;}
 
-/* Rules for footer elements */
+/* FOOTERS */
 .footer__copy {text-align: center;}
 
 
 /* === ADMIN PAGES === */
 
-/* Rules for login */
-.login {
+/* NAV LINKS (dashboard) */
+#nav-sidebar .nav-link:not(.nav-link--active) {color: var(--cogip-dashboard-link);}
+
+/* LOGIN FORM */
+.login, .new-user, .reset {
     display: grid;
     grid-template-columns: 1fr minmax(375px, 2fr) 1fr;
 }
-.login__form {
+.form {
     padding: 2rem;
     border-radius: 1rem;
-    box-shadow: 0 2px 4px 3px rgba(0,0,0,.2);
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,.2); 
     grid-column-start: 2;
 }
-.form__alert {
-    background-color: #ffE6d8;
-    color: #a52a2a;
-    display: none;
-}
-.login__reset {text-align: right;}
-.login__reset a {color: #0000a0}
+.password {cursor: pointer;}
 .remember__paddle {
     display: inline-block;
     position: relative;
@@ -195,48 +181,35 @@ nav-button:active {
 }
 .remember__input:checked + .remember__slider {background-color: #23629f;}
 .remember__input:checked + .remember__slider:before {transform: translateX(25px);}
-.login button {
+.form .btn {
     background-color: #23629f;
     color: #f5f5f5;
     display: block;
     width: 100%;
 }
-.login button:hover {
+.form button:hover {
     color: #f5f5f5;
     background-color: rgba(35, 98, 159, 0.8);
 }
+.reset__link {text-align: right;}
+.login__reset a {color: #0000a0}
 
-/* Rules for dashboard */
-.dashboard {
-    display: grid;
-    grid-template-columns: minmax(50px, 200px) 1fr;
-    grid-template-rows: 1fr;
-    background-color: var(--cogip-nav);
-}
-.dashboard__navbar {
-    background-color: var(--cogip-nav);
-    margin: 0;  
-    padding: 0; 
+/* RESET (password) */
 
-}
-#dashboard__nav, .dashboard__nav-items {
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-color: var(--cogip-nav);
 
-}
-.dashboard__nav-items {
-    
-}
+/* NEW USER FORM */
+option[default] {display: none;}
 
 
 
 
-/* === Media queries === */
-@media(min-width:768px) {
-    .nav__top {
-        border-top: 0 !important;
-    }
-    .content__table-body table {font-size: 0.9rem;}
-}
+
+
+
+
+
+
+
+
+
+
