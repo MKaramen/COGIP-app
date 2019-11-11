@@ -1,30 +1,32 @@
-/* === Vanilla JS === */
+/* === jQUERY === */
 
-/* Hamburger icon */ 
-document.querySelector('.nav__hamburger').addEventListener('click', event => {
-    event.target.classList.toggle('change');
-});
+$(document).ready(function() {
 
-/* Show or hide password */
-document.querySelector('.login .toggle-password').addEventListener('click', event => {
-    const $password = document.querySelector('.login [id="password"]');
-    if ($password.getAttribute('type') === 'password') {
-        event.target.classList.remove('fa-eye-slash');
-        event.target.classList.add('fa-eye');
-        $password.setAttribute('type', 'text');
-    }
-    else {
-        event.target.classList.remove('fa-eye');
-        event.target.classList.add('fa-eye-slash');
-        $password.setAttribute('type', 'password');
-    }
-});
+    /* HAMBURGR ICON  */
+    $('.nav__hamburger').click(() => $('.nav__hamburger').toggleClass('change'));
+    
+    /* PASSWORD-LOGIN (show or hide) */
+    $('.password').click(() => {
+        const $password = $('[id="password"]');
+        const $icon = $('.password__toggle');
+        if ($password.attr('type') === 'password') {
+            $icon.removeClass('fa-eye-slash');
+            $icon.addClass('fa-eye');
+            $password.attr('type', 'text');
+        }
+        else {
+            $icon.removeClass('fa-eye');
+            $icon.addClass('fa-eye-slash');
+            $password.attr('type', 'password');
+        }
+    });
+
+    /* SIDEBAR (show or hide on mouse over/out) */
+    $('#nav-sidebar .nav-link').hover(
+        () => $('#nav-sidebar .nav-link span').removeClass('d-none'),
+        () => $(window).width() < 992 ? $('#nav-sidebar .nav-link span').addClass('d-none') : false
+    );
 
 
-/* === jQuery === */
-// $(document).ready(function() {
-//     // Scripts for hamburger icon 
-//     $('.nav__hamburger').click(function() {
-//         $('.nav__hamburger').toggleClass('change');
-//     });
-// }); 
+
+});  
