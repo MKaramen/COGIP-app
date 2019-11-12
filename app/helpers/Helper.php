@@ -40,10 +40,42 @@ class Helper
         return implode('-', array_map('ucfirst', explode('-', ucwords($word))));
     }
 
+    /* */
+    public static function makeAdminTable($data, $removes): void
+    {
+        $cols = $data['cols'];
+        $rows = $data['rows'];
+
+        // Heading (<thead>)
+        echo '<thead class="text-center">';
+        echo '<tr><th scope="col">Obs</th><th scope="col">Actions</th>';
+        foreach ($cols as $key => $colName) 
+        {
+            if (!in_array($key, $removes)) echo '<th scope="col">' . $colName . '</th>';
+        }
+        echo '</tr></thead>';
+
+        // Body (<tbody>)
+        echo '<tbody>';
+        $number = 1;
+        foreach ($rows as $user) 
+        {
+            echo '<tr>';
+            echo '<td>' . ($number++)  . '</td>';
+            echo '<td><a class="table__link" href="#">Edit</a> | <a class="table__link" href="#">Delete</a></td>';
+            foreach ($user as $key => $value) 
+            {
+                if (!in_array($key, $removes)) echo '<td>' . $value . '</td>';
+            }
+            echo '</tr>';
+        }
+        echo '</tbody>';
+    }
+
     /** Create a table, make every single element clickable and 
      * it redirects the user to the right detail page 
      */
-    public static function makeTable(string $categoryName, array $dataModel): void
+    public static function makePagesTable(string $categoryName, array $dataModel): void
     {
         # Heading (<thead>)
         // echo '<thead class="text-center">';
