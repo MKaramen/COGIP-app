@@ -45,7 +45,7 @@ class PagesModel extends Model
         $request = 'SELECT people.id, people_firstname, people_lastname, people_email, people_phone, people_company FROM people';
         $result = $this->getData($request);
         $result_global['users']['row'] = $result;
-        $result_global['users']['col'] = array("Id", "Name", "Email", "Phone Number", 'Company');
+        $result_global['users']['col'] = array("Id", "First Name", "Last Name", "Email", "Phone Number", 'Company');
         // Helper::dump($result);
         return $result_global;
     }
@@ -88,7 +88,7 @@ class PagesModel extends Model
         $request = 'SELECT people_firstname, people_lastname, people_email, people_phone, company.company_name FROM people INNER JOIN people_has_company ON people.id = people_has_company.fk_people INNER JOIN company ON people_has_company.fk_company = company.id';
         $result = $this->getData($request);
         $result_global['user_info']['row'] = $result;
-        $result_global['user_info']['col'] = array("Id", "Name", "Email", "Phone Number", 'Company');
+        $result_global['user_info']['col'] = array("Id", "First Name", "Last Name", "Email", "Phone Number", 'Company');
 
 
         // Second table - Get all the invoices related to the user 
@@ -117,7 +117,7 @@ class PagesModel extends Model
         $request = 'SELECT people.people_firstname, people.people_lastname, people.people_email, people.people_phone, people.people_company FROM invoice INNER JOIN company ON invoice_fk_company = company.id INNER JOIN people_has_company ON company.id = people_has_company.fk_company INNER JOIN people ON people_has_company.fk_people = people.id';
         $result = $this->getData($request);
         $result_global['invoice_contactPerson']['row'] = $result;
-        $result_global['invoice_contactPerson']['col'] = array("Id", "Name", "Email", "Phone Number", 'Company');
+        $result_global['invoice_contactPerson']['col'] = array("Id", "First Name", "Last Name", "Email", "Phone Number", 'Company');
         return $result_global;
     }
 
@@ -128,14 +128,14 @@ class PagesModel extends Model
         $request = 'SELECT people.people_firstname, people.people_lastname, people.people_email, people.people_phone, people.people_company FROM company INNER JOIN people_has_company ON company.id = people_has_company.fk_company INNER JOIN people ON people.id = people_has_company.fk_people';
         $result = $this->getData($request);
         $result_global['company_people']['row'] = $result;
-        $result_global['company_people']['col'] = array("Id", "Name", "Email", "Phone Number", 'Company');
+        $result_global['company_people']['col'] = array("Id", "First Name", "Last Name", "Email", "Phone Number", 'Company');
 
         // Second Table - Show all the invoices related to the company
         //ADD : WHERE ID = COMPANY.ID
         $request = 'SELECT invoice.invoice_number, invoice.invoice_date, people.people_firstname, people.people_lastname FROM company INNER JOIN invoice ON invoice.invoice_fk_company = company.id INNER JOIN people ON invoice.invoice_fk_people = people.id';
         $result = $this->getData($request);
         $result_global['company_invoice']['row'] = $result;
-        $result_global['company_invoice']['col'] = array("Id", "Invoice Number", "Date", "Contact Person");
+        $result_global['company_invoice']['col'] = array("Id", "Invoice Number", "Date", "First Name", "Last Name");
         // Helper::dump($result);
         return $result_global;
     }
