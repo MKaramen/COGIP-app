@@ -22,15 +22,28 @@ Session::timeout();
 
             <!-- TABLE (users) -->
             <div class="content__table">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover table-striped table-sm">
-                        
-                    </table>
-                </div>
+                <h3 class="content__table-title">Table of users</h3> 
+                <table class="table table-fluid table-bordered table-hover table-striped table-sm" id="admin__users">
+                    <?=Helper::makeAdminTable($dataModel['users'], [])?>
+                </table>
+            </div>
+
+            <!-- TABLE (companies) -->
+            <div class="content__table">
+                <h3 class="content__table-title">Table of companies</h3> 
+                <table class="table table-fluid table-bordered table-hover table-striped table-sm" id="admin__companies">
+                    <?=Helper::makeAdminTable($dataModel['companies'], [])?>
+                </table>
+            </div>
+
+            <!-- TABLE (invoices) -->
+            <div class="content__table">
+                <h3 class="content__table-title">Table of invoices</h3> 
+                <table class="table table-fluid table-bordered table-hover table-striped table-sm" id="admin__invoices">
+                    <?=Helper::makeAdminTable($dataModel['invoices'], [])?>
+                </table>
             </div>
         </div>
-
-        <!-- TABLE (companies) -->
 
     </section> 
     <!-- END OF MAIN CONTENT -->
