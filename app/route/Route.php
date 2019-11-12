@@ -32,7 +32,7 @@ class Route
 
             $this->currentMethod = $currentMethod;
             if (isset($url[1])) unset($url[1]);                                   // unset method
-            $this->params = $url ? array_values($url) : [];                      // get Params
+            $this->params = $url ? array_values(array_slice($url, 2)) : array();                   // get Params
             // Call currentMethod on instance currentController with array of params
             $this->currentController->{$this->currentMethod}($this->params);
         } catch (Exception $e) {

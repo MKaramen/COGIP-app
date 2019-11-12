@@ -21,7 +21,7 @@ class Helper
     /* Redirect to specific page */
     public static function to(string $page): void
     {
-        header('location: ' . $page);
+        header('location:' . getenv('APP_URL') . $page);
     }
 
     /* Redirect to same page */
