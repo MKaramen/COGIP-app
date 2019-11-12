@@ -11,7 +11,6 @@ class Route
     private $currentController;
     private $currentMethod;
     private $params;
-    private $errors = [];
     public function routeRequest(): void
     {
         try {
@@ -28,21 +27,17 @@ class Route
             }
             $this->currentController = $currentController;
             $controllerFile = getenv('APP_ROOT') . '/app/controllers/' . $this->currentController . '.php';
-            if (!file_exists($controllerFile)) {
-                $this->errors[] = 'Controller Page is not found!';
-                throw new Exception;
-            };
-            $this->currentController = new $currentController();                 // instantiate controller
+            if (!file_exists($controllerFile)) throw new Exception('Page not found!');
+            $this->currentController = new $currentController();                  // instantiate controller
 
             $this->currentMethod = $currentMethod;
-            $this->params = $url ? array_values(array_slice($url, 2)) : array();  // get Params
+            if (isset($url[1])) unset($url[1]);                                   // unset method
+            $this->params = $url ? array_values($url) : [];                      // get Params
             // Call currentMethod on instance currentController with array of params
             $this->currentController->{$this->currentMethod}($this->params);
-        } catch (Throwable $e) {
-            $this->errors[] = $e->getMessage();
-            $errors = $this->errors;
-
-            //Helper::to('/app/views/errors/404');
+        } catch (Exception $e) {
+            echo $e->getMessage() . '<br>';
+            Helper::to(getenv('APP_ROOT') . '/app/views/errors/404.php');
         }
     }
 }

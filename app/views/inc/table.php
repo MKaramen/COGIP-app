@@ -1,21 +1,11 @@
-<div class="content__table-body">
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover table-striped table-sm">
-            <thead>
-                <tr>
-                    <?php foreach ($dataTable['cols'] as $col) echo '<th scope="col">' . $col . '</th>'?>
-                </tr>
-            </thead>
-            <tbody>
-                <?php 
-                foreach ($dataTable['rows'] as $row) 
-                {
-                    echo '<tr>';
-                    foreach ($row as $col => $value) echo '<td>' . $value . '</td>';
-                    echo '</tr>';
-                }
-                ?>
-            </tbody> 
-        </table>
-    </div>
+<?php ob_start(); ?>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover table-striped table-sm">
+        <?php $first_part = ob_get_clean(); ?>
+
+        <?php ob_start(); ?>
+    </table>
 </div>
+
+<?php $second_part = ob_get_clean(); ?>

@@ -21,10 +21,10 @@ class PagesModel extends Model
         // Helper::dump($result_firstTable);
 
         // Request for double table - PEOPLE - WORKS 
-        $request_secondTable = 'SELECT people.id, people_fullName, people_email, people_phone, people_company FROM people LIMIT 5';
+        $request_secondTable = 'SELECT people.id, people_firstname, people_lastname, people_email, people_phone, people_company FROM people LIMIT 5';
         $result_secondTable = $this->getData($request_secondTable);
         $result_global['last_contact']['row'] = $result_secondTable;
-        $result_global['last_contact']['col'] = array("Id", "Name", "Email", "Phone", "Company");
+        $result_global['last_contact']['col'] = array("Id", "First Name", "Last Name", "Email", "Phone", "Company");
         // Helper::dump($result_secondTable);
 
         // Request Third table - COMPANY - WORKS 
@@ -42,7 +42,7 @@ class PagesModel extends Model
 
     public function users(): array
     {
-        $request = 'SELECT people.id, people_fullName, people_email, people_phone, people_company FROM people';
+        $request = 'SELECT people.id, people_firstname, people_lastname, people_email, people_phone, people_company FROM people';
         $result = $this->getData($request);
         $result_global['users']['row'] = $result;
         $result_global['users']['col'] = array("Id", "Name", "Email", "Phone Number", 'Company');
@@ -85,7 +85,7 @@ class PagesModel extends Model
     {
         // ADD WHERE ID = PEOPLE.ID  
         // First Table - Get all data from the user 
-        $request = 'SELECT people_fullName, people_email, people_phone, company.company_name FROM people INNER JOIN people_has_company ON people.id = people_has_company.fk_people INNER JOIN company ON people_has_company.fk_company = company.id';
+        $request = 'SELECT people_firstname, people_lastname, people_email, people_phone, company.company_name FROM people INNER JOIN people_has_company ON people.id = people_has_company.fk_people INNER JOIN company ON people_has_company.fk_company = company.id';
         $result = $this->getData($request);
         $result_global['user_info']['row'] = $result;
         $result_global['user_info']['col'] = array("Id", "Name", "Email", "Phone Number", 'Company');
@@ -114,7 +114,7 @@ class PagesModel extends Model
 
         //Second table - Contact person
         // ADD : WHERE ID = INVOICE.ID
-        $request = 'SELECT people.people_fullName, people.people_email, people.people_phone, people.people_company FROM invoice INNER JOIN company ON invoice_fk_company = company.id INNER JOIN people_has_company ON company.id = people_has_company.fk_company INNER JOIN people ON people_has_company.fk_people = people.id';
+        $request = 'SELECT people.people_firstname, people.people_lastname, people.people_email, people.people_phone, people.people_company FROM invoice INNER JOIN company ON invoice_fk_company = company.id INNER JOIN people_has_company ON company.id = people_has_company.fk_company INNER JOIN people ON people_has_company.fk_people = people.id';
         $result = $this->getData($request);
         $result_global['invoice_contactPerson']['row'] = $result;
         $result_global['invoice_contactPerson']['col'] = array("Id", "Name", "Email", "Phone Number", 'Company');
@@ -125,14 +125,14 @@ class PagesModel extends Model
     {
         // First table - Show all the people in the company
         //ADD : WHERE ID = COMPANY.ID
-        $request = 'SELECT people.people_fullName, people.people_email, people.people_phone, people.people_company FROM company INNER JOIN people_has_company ON company.id = people_has_company.fk_company INNER JOIN people ON people.id = people_has_company.fk_people';
+        $request = 'SELECT people.people_firstname, people.people_lastname, people.people_email, people.people_phone, people.people_company FROM company INNER JOIN people_has_company ON company.id = people_has_company.fk_company INNER JOIN people ON people.id = people_has_company.fk_people';
         $result = $this->getData($request);
         $result_global['company_people']['row'] = $result;
         $result_global['company_people']['col'] = array("Id", "Name", "Email", "Phone Number", 'Company');
 
         // Second Table - Show all the invoices related to the company
         //ADD : WHERE ID = COMPANY.ID
-        $request = 'SELECT invoice.invoice_number, invoice.invoice_date, people.people_fullName FROM company INNER JOIN invoice ON invoice.invoice_fk_company = company.id INNER JOIN people ON invoice.invoice_fk_people = people.id';
+        $request = 'SELECT invoice.invoice_number, invoice.invoice_date, people.people_firstname, people.people_lastname FROM company INNER JOIN invoice ON invoice.invoice_fk_company = company.id INNER JOIN people ON invoice.invoice_fk_people = people.id';
         $result = $this->getData($request);
         $result_global['company_invoice']['row'] = $result;
         $result_global['company_invoice']['col'] = array("Id", "Invoice Number", "Date", "Contact Person");

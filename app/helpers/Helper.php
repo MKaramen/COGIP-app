@@ -13,15 +13,15 @@ class Helper
     {
         // Require view file
         $file = getenv('APP_ROOT') . '/app/views/' . $view . '.php';
-        if(!file_exists($file)) throw new Exception($file . ' is not found!');
-        if(!is_readable($file)) throw new Exception($file . ' is not readable!');
+        if (!file_exists($file)) throw new Exception($file . ' is not found!');
+        if (!is_readable($file)) throw new Exception($file . ' is not readable!');
         require_once $file;
     }
 
     /* Redirect to specific page */
     public static function to(string $page): void
     {
-        header('location: ' . $page);x§
+        header('location: ' . $page);
     }
 
     /* Redirect to same page */
@@ -88,65 +88,36 @@ class Helper
         return $out;
     }
 
-     /* Uppercase the first letter/s of a string, including where the names are joined by a hyphens)*/
-     public static function capitalize(string $word): string 
-     {
-         return implode('-', array_map('ucfirst', explode('-', ucwords($word))));
-     }
+    /* Uppercase the first letter/s of a string, including where the names are joined by a hyphens)*/
+    public static function capitalize(string $word): string
+    {
+        return implode('-', array_map('ucfirst', explode('-', ucwords($word))));
+    }
+
+    /* */
+    public static function makeAdminTable($data, $removes): void
+    {
+        $cols = $data['cols'];
+        $rows = $data['rows'];
+        // Heading (<thead>)
+        echo '<thead class="text-center">';
+        echo '<tr><th scope="col">Obs</th><th scope="col">Actions</th>';
+        foreach ($cols as $key => $colName) {
+            if (!in_array($key, $removes)) echo '<th scope="col">' . $colName . '</th>';
+        }
+        echo '</tr></thead>';
+        // Body (<tbody>)
+        echo '<tbody>';
+        $number = 1;
+        foreach ($rows as $user) {
+            echo '<tr>';
+            echo '<td>' . ($number++)  . '</td>';
+            echo '<td><a class="table__link" href="#">Edit</a> | <a class="table__link" href="#">Delete</a></td>';
+            foreach ($user as $key => $value) {
+                if (!in_array($key, $removes)) echo '<td>' . $value . '</td>';
+            }
+            echo '</tr>';
+        }
+        echo '</tbody>';
+    }
 }
-
-
-// public static function baseURL(string $page): string
-// {
-//     return self::getAppURL() . '/' . $page;
-// }
-
-// public static function siteURL(string $page): string
-// {
-//     return self::getAppURL() . '/index.php/' . $page;
-// }
-
-/* Returns post request data */
-// public static function postRequest(bool $is_array=true): array 
-// {
-//     $result = array();
-//     if (count($_GET) > 0)  $result['get'] = $_GET;
-
-//     return json_decode(json_encode($result), $is_array);
-// }
-
-// public static function getRequest(bool $is_array=true): array 
-// {
-//     $result = array();
-//     if (count($_POST) > 0) $result['post'] = $_POST;
-//     $result['file'] = $_FILES;
-//     return json_decode(json_encode($result), $is_array);
-// }
-
-// public static function fileRequest(bool $is_array=true): array 
-// {
-//     $result = array();
-//     if (count($_GET) > 0)  $result['get'] = $_GET;
-//     if (count($_POST) > 0) $result['post'] = $_POST;
-//     $result['file'] = $_FILES;
-//     return json_decode(json_encode($result), $is_array);
-// }
-
-/**
- * Returns a specific request data
- */
-    // public static function get(string $key): array {
-    //     $obj = new static();
-    //     $data = $obj->all(true);
-    //     return $data[$key];
-    // }
-
-
-    /* Get the app URL dynamically */
-    // function getAppURL(): string
-    // {
-    //     if(isset($_SERVER['HTTPS'])) $protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != 'off') ? 'https' : 'http';
-    //     else $protocol = 'http';
-
-    //     return rtrim($protocol . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], '/');
-    // }

@@ -8,9 +8,7 @@ class AdminModel extends Database
         $post = Helper::getPost();
         foreach ($post as $key => $value) {
             switch ($key) {
-                case $key == "people_name":
                 case $key == "submit":
-                case $key == "people_firstName":
                     break;
                 case $key == "people_password":
                     $value = password_hash($value, PASSWORD_DEFAULT);
@@ -98,12 +96,12 @@ class AdminModel extends Database
     /* Check if user is logged in and returns user info  */
     public function login(string $username, string $password): array
     {
-        $this->open();
+        $this->connectDb();
         $userQuery = $this->db->prepare("SELECT * FROM people WHERE people_lastname=:people_lastname");
         $userQuery->execute(array('people_lastname' => $username));
         $user = $userQuery->fetch();
         $passwordHashed = $user['people_password'] ? $user['people_password'] : ''; // prevent errors (if returns FALSE)
-        $this->close();
+        $this->closeDb();
         return password_verify($password, $passwordHashed) ? $user : array();
     }
     public function dashboard(): array

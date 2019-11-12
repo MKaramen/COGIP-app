@@ -92,13 +92,13 @@ class Database
     /* Read data from database and returns an array */
     public function read($sql): array
     {
-        $this->open();
+        $this->connectDb();
         $out = [];
         $req = $this->db->query($sql);
         while ($row = $req->fetch()) {
             $out[] = $row;
         }
-        $this->close();
+        $this->closeDb();
         return $out;
     }
 
@@ -110,7 +110,7 @@ class Database
     /* Returns the structure of table (array of columns) */
     public function getColumnsOfTable(string $table, string $dbname = ''): array
     {
-        $this->open();
+        $this->openDb();
         $dbname = $dbname ? $dbname : $this->db_name;
         $sql = "SELECT column_name 
                 FROM information_schema.columns  
@@ -118,36 +118,36 @@ class Database
         $req  = $this->db->query($sql);
         $out = $req->fetchAll();
         $out = array_column($out, 'column_name');
-        $this->close();
+        $this->closeDb();
         return $out;
     }
     public function insert(string $table, array $data = [], string $access = 'god'): void
     {
-        $this->open();
+        $this->connectDb();
         $keys = array_keys($data);
         $fields = implode(', ', $keys);
         $values = implode(', :', $keys);
         $sql = "INSERT INTO $table ($fields) VALUES (:$values)";
         $stmt = $this->db->prepare($sql);
         $stmt->execute($data);
-        $this->close();
+        $this->closeDb();
     }
     public function update(string $table, array $data = [], int $id, string $access = 'god'): void
     {
-        $this->open();
+        $this->connectDb();
         $fields = '';
         foreach ($data as $key => $value) $fields .= "$key=:$key,";
         $fields = rtrim($fields, ',');
         $sql = "UPDATE $table SET $fields WHERE id=$id";
         $stmt = $this->db->prepare($sql);
         $stmt->execute($data);
-        $this->close();
+        $this->closeDb();
     }
     public function delete(string $table, int $id, $access = 'god'): void
     {
-        $this->open();
+        $this->connectDb();
         $sql = "DELETE FROM $table WHERE id=$id";
         $this->db->query($sql);
-        $this->close();
+        $this->closeDb();
     }
 }
