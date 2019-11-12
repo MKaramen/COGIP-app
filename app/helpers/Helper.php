@@ -12,16 +12,16 @@ class Helper
     public static function view(string $view, array $data = [], array $dataModel = []): void
     {
         // Require view file
-        $path = getenv('APP_ROOT') . '/app/views/' . $view . '.php';
-        if (!file_exists($path)) throw new Exception($path . 'not found!');
-
-        require_once $path;
+        $file = getenv('APP_ROOT') . '/app/views/' . $view . '.php';
+        if(!file_exists($file)) throw new Exception($file . ' is not found!');
+        if(!is_readable($file)) throw new Exception($file . ' is not readable!');
+        require_once $file;
     }
 
     /* Redirect to specific page */
     public static function to(string $page): void
     {
-        header('location: ' . $page);
+        header('location: ' . $page);x§
     }
 
     /* Redirect to same page */
@@ -87,6 +87,12 @@ class Helper
         }
         return $out;
     }
+
+     /* Uppercase the first letter/s of a string, including where the names are joined by a hyphens)*/
+     public static function capitalize(string $word): string 
+     {
+         return implode('-', array_map('ucfirst', explode('-', ucwords($word))));
+     }
 }
 
 
