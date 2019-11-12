@@ -80,8 +80,7 @@ class AdminController extends Controller
             'content_description' => 'Hi '. $username . '! What would you like to do today?',
         );
 
-        $dataModel = [];
-        //$dataModel = $this->currentModel->dashboard();
+        $dataModel = $this->currentModel->dashboard();
 
         $this->view('admin/dashboard', $dataInfo, $dataModel);
     }
