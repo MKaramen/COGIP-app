@@ -1,7 +1,7 @@
 <?php require getenv('APP_ROOT') . '/app/views/inc/header.php';?>
 
 <!-- MAIN (login.php) -->
-<main id="main" class="jumbotron jumbotron-fluid mb-0 py-3">
+<main class="main jumbotron jumbotron-fluid mb-0 py-0">
 
     <!-- ASIDE (dashboard) -->
     <aside id="aside" class="dashboard">

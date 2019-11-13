@@ -9,7 +9,7 @@ const setupTable = ($node) => {
         'paging': true,
         'responsive': true,
         'dom': 'Blfrtip',
-        'buttons': [
+        buttons: [
             {
                 text: 'Add',
                 action: (e, dt, node, config ) => 'ok'

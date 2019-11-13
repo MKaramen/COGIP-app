@@ -72,4 +72,14 @@ class AdminModel extends Database
 
         return $out;
     }
+
+    public function new_user(int $id): array
+    {
+        $this->connectDb();
+        $req = $this->db->query("SELECT * FROM `people` WHERE id={$id}");
+        $user = $req->fetch();
+        $this->closeDb();
+
+        return $user;
+    }
 }

@@ -19,7 +19,7 @@ body {
 }
 
 .footer {
-  background-color: #d4ddf9;
+  background-color: #e9ecef;
 }
 
 .footer__copy {
@@ -264,5 +264,33 @@ button * {
 
 .login__reset a, .table__link {
   color: #d4ddf9;
+}
+
+/* DATABLES */
+table {
+  font-size: 0.85rem;
+  width: 100%;
+}
+
+table.dataTable {
+  border-collapse: collapse !important;
+}
+
+.dt-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.dt-button {
+  margin: auto;
+  width: 176px;
+  background-color: #23629f;
+  color: #f5f5f5;
+}
+
+/* NEW USER FORM */
+option[default] {
+  display: none;
 }
 /*# sourceMappingURL=app.css.map */

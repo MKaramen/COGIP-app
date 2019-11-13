@@ -62,6 +62,19 @@ class Database
         return $out;
     }
 
+    public function getCompanies(): array
+    {
+        $this->connectDb();
+        $req = $this->db->query("SELECT company_name FROM `company`");
+        $out = [];
+        while ($this->fetchInfo = $req->fetchColumn()) {
+            $out[] = $this->fetchInfo;
+        }
+        $this->closeDb();
+        
+        return $out;
+    }
+
     public function insert(string $table, array $data=[], string $access='god'): void
     {
         $this->connectDb(); 

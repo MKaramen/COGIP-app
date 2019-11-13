@@ -22,7 +22,7 @@ class AdminController extends Controller
             'content_description' => 'Please log in to start your session.',
         );
 
-        // Login form proessing
+        // Login form processing
         if($_SERVER['REQUEST_METHOD'] == 'POST') 
         {   // POST request (login form)
 
@@ -73,30 +73,65 @@ class AdminController extends Controller
     /* */
     public function dashboard(): void
     {
-        $username = Helper::capitalize($_SESSION['firstname']);
+        $username = $_SESSION['firstname'] ?? '';
         $dataInfo = array(
             'title'               => 'Dashboard',
             'content_title'       => 'Dashboard', 
             'content_description' => 'Hi '. $username . '! What would you like to do today?',
         );
-
         $dataModel = $this->currentModel->dashboard();
-
         $this->view('admin/dashboard', $dataInfo, $dataModel);
     }
 
-    public function new_user(): void
+    public function new_user(array $args): void
     {
+        $id = $args ? $args[0] : '0'; 
+        $id = intval(filter_var(trim($id), FILTER_SANITIZE_NUMBER_INT)); 
         $dataInfo = array(
             'title'               => 'New user',
             'content_title'       => 'Create new user', 
             'content_description' => 'Please fill in your credentials to create a free account',
         );
 
-        $dataModel = [];
-        //$dataModel = $this->currentModel->new_user();
+        // New user form processing
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {   
+            // POST request (login form) 
+        }
+        else {
+            // No POST request (default values)
+            if ($id) {
+                // Edit values
+                $user = $this->currentModel->new_user($id);
+                $dataModel = array(
+                    'lastname'   => $user['people_lastname'],
+                    'firstname'  => $user['people_firstname'],
+                    'phone'      => $user['people_phone'],
+                    'email'      => $user['people_email'],
+                    'password'   => $user['people_password'],
+                    'company'    => $user['people_company'],
+                    'date'       => implode('T', explode(' ', $user['people_date'])),
+                    'access'     => $user['people_access'],
+                    'compagnies' => $this->currentModel->getCompanies(),
+                );
+            }
+            else {
+                // No edit values
+                $dataModel = array(
+                    'lastname'  => '',
+                    'firstname' => '',
+                    'phone'     => '',
+                    'email'     => '',
+                    'password'  => '',
+                    'company'   => '',
+                    'date'      => date('Y-m-d H:i:s'),
+                    'access'    => 'User',
+                    'companies' => $this->currentModel->getCompanies(),
+                );
+            }
 
-        $this->view('admin/new_user', $dataInfo, $dataModel);
+            // Load view with edit values
+            $this->view('admin/new_user', $dataInfo, $dataModel);
+        }
     }
 
     public function new_invoice(): void
@@ -106,11 +141,19 @@ class AdminController extends Controller
             'content_title'       => 'Create new invoice', 
             'content_description' => '',
         );
-
         $dataModel = [];
-        //$dataModel = $this->currentModel->new_invoice();
 
-        $this->view('admin/new_invoice', $dataInfo, $dataModel);
+        // New invoice form processing
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {   
+            // POST request (login form) 
+        }
+        else {
+            // No POST request (default values)
+            //$dataModel = $this->currentModel->new_invoice();
+
+            // Load view with edit values
+            $this->view('admin/new_user', $dataInfo, $dataModel);
+        }
     }
 
     public function new_company(): void
@@ -120,11 +163,19 @@ class AdminController extends Controller
             'content_title'       => 'Create new company', 
             'content_description' => '',
         );
-
         $dataModel = [];
-        //$dataModel = $this->currentModel->new_company();
 
-        $this->view('admin/new_company', $dataInfo, $dataModel);
+        // New company form processing
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {   
+            // POST request (login form) 
+        }
+        else {
+            // No POST request (default values)
+            //$dataModel = $this->currentModel->new_company();
+
+            // Load view with edit values
+            $this->view('admin/new_user', $dataInfo, $dataModel);
+        }
     }
 
     public function reset_password(): void
