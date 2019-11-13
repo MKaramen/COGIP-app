@@ -1,4 +1,6 @@
 <IfModule mod_rewrite.c>
+    Options -Indexes
+
     # Turn on rewrite engine
     RewriteEngine On
     
